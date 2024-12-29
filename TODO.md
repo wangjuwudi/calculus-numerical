@@ -1,3 +1,21 @@
+# Basic Computing Support<br>基本的计算支持
+
+<br>
+
+## Trait Integral（Integral接口）
+
+Provides support for arbitrary-precision integer computations.
+
+支持任意精度的整数计算。
+
+## Exponentiation（幂运算）
+
+Supports fast exponentiation for integers of arbitrary precision and floating-point numbers of arbitrary precision.
+
+支持任意精度的整数指数的快速幂运算和浮点指数的快速幂运算。
+
+<br>
+
 # Basic Differential and Integral Functions<br>基本的微积分功能
 
 <br>
