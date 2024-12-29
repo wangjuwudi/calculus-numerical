@@ -1,5 +1,3 @@
 {
-  "import": [
-    "kcn-judu/calculus-numerical/lib"
-  ]
+	"import": ["kcn-judu/calculus-numerical/lib"]
 }
