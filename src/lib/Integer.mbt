@@ -1,3 +1,4 @@
+///|
 pub(all) enum Integer {
   IntegerInt(Int)
   IntegerInt64(Int64)
