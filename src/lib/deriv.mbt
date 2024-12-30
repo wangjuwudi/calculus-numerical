@@ -32,7 +32,7 @@ fn central_deriv(
   h : Double
 ) -> (Double, Double, Double) {
   let fn_eval : Array[Double] = [x - h, x - h / 2, x + h / 2, x + h]
-  fn_eval.map_inplace(fn(n) { f(n) })
+  fn_eval.map_inplace(f)
   let r3 = 0.5 * (fn_eval[3] - fn_eval[0])
   let r5 = 4.0 / 3.0 * (fn_eval[2] - fn_eval[1]) - 1.0 / 3.0 * r3
   let e3 = (@double.abs(fn_eval[3]) + @double.abs(fn_eval[0])) *
@@ -138,7 +138,7 @@ fn forward_deriv(
   h : Double
 ) -> (Double, Double, Double) {
   let fn_eval = [x + h / 4.0, x + h / 2.0, x + 3.0 / 4.0 * h, x + h]
-  fn_eval.map_inplace(fn(n) { f(n) })
+  fn_eval.map_inplace(f)
   let r2 = 2.0 * (fn_eval[3] - fn_eval[1])
   let r4 = 22.0 / 3.0 * (fn_eval[3] - fn_eval[2]) -
     62.0 / 3.0 * (fn_eval[2] - fn_eval[1]) +
