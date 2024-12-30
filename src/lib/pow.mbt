@@ -1,4 +1,27 @@
 ///|
+/// Computes the result of raising a floating-point base to an integer exponent
+/// using an efficient divide-and-conquer algorithm. Handles positive, negative,
+/// and zero exponents correctly, including special cases for minimum integer
+/// values.
+///
+/// Parameters:
+///
+/// * `base` : The floating-point number to be raised to a power.
+/// * `exp` : The integer exponent, which can be a regular integer (`Int`), a
+/// 64-bit integer (`Int64`), or an arbitrary-precision integer (`BigInt`).
+///
+/// Returns the result of `base` raised to the power of `exp`. Returns 1.0 when
+/// `exp` is 0, and 1.0/result when `exp` is negative.
+///
+/// Example:
+///
+/// ```
+/// test "pow_integer_exp" {
+///   inspect!(pow_integer_exp(2.0, IntegerInt(3)), content="8.0")
+///   inspect!(pow_integer_exp(2.0, IntegerInt(-2)), content="0.25")
+///   inspect!(pow_integer_exp(2.0, IntegerInt(0)), content="1.0")
+/// }
+/// ```
 pub fn pow_integer_exp(base : Double, exp : Integer) -> Double {
   match exp {
     IntegerInt(exp_int) =>
