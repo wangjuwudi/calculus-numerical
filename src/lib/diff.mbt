@@ -28,7 +28,7 @@
 pub fn diff_backward(f : (Double) -> Double, x : Double) -> (Double, Double) {
   let a : Array[Double] = [-2, -1, 0]
   a.map_inplace(fn(n) { n * machine_dbl_epsilon + x })
-  let d = a.map(fn(n) { f(n) })
+  let d = a.map(f)
   for k = 1; k < 4; k = k + 1 {
     for i = 0; i < 3 - k; i = i + 1 {
       d[i] = (d[i + 1] - d[i]) / (a[i + k] - a[i])
