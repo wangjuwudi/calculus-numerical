@@ -1,5 +1,3 @@
 {
-  "import": [
-    "kcn-judu/calculus-numerical/lib/builtin"
-  ]
+	"import": ["kcn-judu/calculus-numerical/lib/internal"]
 }
