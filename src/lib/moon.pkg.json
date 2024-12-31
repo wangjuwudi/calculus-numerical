@@ -1,1 +1,8 @@
-{}
+{
+	"import": [
+		"kcn-judu/calculus-numerical/builtin",
+		"kcn-judu/calculus-numerical/diff",
+		"kcn-judu/calculus-numerical/deriv",
+		"kcn-judu/calculus-numerical/integration"
+	]
+}
