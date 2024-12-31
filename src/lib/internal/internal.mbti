@@ -1,4 +1,4 @@
-package kcn-judu/calculus-numerical/lib/builtin
+package kcn-judu/calculus-numerical/lib/internal
 
 // Values
 let integer_one : Integer
