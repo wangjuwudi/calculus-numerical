@@ -36,13 +36,13 @@ fn central_deriv(
   let r3 = 0.5 * (fn_eval[3] - fn_eval[0])
   let r5 = 4.0 / 3.0 * (fn_eval[2] - fn_eval[1]) - 1.0 / 3.0 * r3
   let e3 = (@double.abs(fn_eval[3]) + @double.abs(fn_eval[0])) *
-    machine_dbl_epsilon
+    @builtin.machine_dbl_epsilon
   let e5 = 2.0 *
     (@double.abs(fn_eval[2]) + @double.abs(fn_eval[1])) *
-    machine_dbl_epsilon +
+    @builtin.machine_dbl_epsilon +
     e3
   let a = @double.abs(r3 / h)
-  let b = @double.abs(r5 / h) * (@double.abs(x) / h) * machine_dbl_epsilon
+  let b = @double.abs(r5 / h) * (@double.abs(x) / h) * @builtin.machine_dbl_epsilon
   let mut dy = a
   if a < b {
     dy = b
@@ -151,9 +151,9 @@ fn forward_deriv(
       @double.abs(fn_eval[1]) +
       @double.abs(fn_eval[0])
     ) *
-    machine_dbl_epsilon
+    @builtin.machine_dbl_epsilon
   let a = @double.abs(r2 / h)
-  let b = @double.abs(r4 / h) * @double.abs(x / h) * machine_dbl_epsilon
+  let b = @double.abs(r4 / h) * @double.abs(x / h) * @builtin.machine_dbl_epsilon
   let mut dy = a
   if a < b {
     dy = b

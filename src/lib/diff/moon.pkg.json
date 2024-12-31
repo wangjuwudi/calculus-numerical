@@ -1,1 +1,5 @@
-{}
+{
+  "import": [
+    "kcn-judu/calculus-numerical/lib/builtin"
+  ]
+}
