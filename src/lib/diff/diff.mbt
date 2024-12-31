@@ -27,7 +27,7 @@
 /// ```
 pub fn diff_backward(f : (Double) -> Double, x : Double) -> (Double, Double) {
   let a : Array[Double] = [-2, -1, 0]
-  a.map_inplace(fn(n) { n * @builtin.machine_dbl_epsilon + x })
+  a.map_inplace(fn(n) { n * @internal.machine_dbl_epsilon + x })
   let d = a.map(f)
   for k = 1; k < 4; k = k + 1 {
     for i = 0; i < 3 - k; i = i + 1 {
@@ -35,11 +35,11 @@ pub fn diff_backward(f : (Double) -> Double, x : Double) -> (Double, Double) {
     }
   }
   let mut a2 = @double.abs(d[0] + d[1] + d[2])
-  let c = 100.0 * @builtin.machine_sqrt_dbl_epsilon
+  let c = 100.0 * @internal.machine_sqrt_dbl_epsilon
   if a2 < c {
     a2 = c
   }
-  let mut h = (@builtin.machine_sqrt_dbl_epsilon / (2.0 * a2)).sqrt()
+  let mut h = (@internal.machine_sqrt_dbl_epsilon / (2.0 * a2)).sqrt()
   if h > c {
     h = c
   }
@@ -75,7 +75,7 @@ pub fn diff_backward(f : (Double) -> Double, x : Double) -> (Double, Double) {
 /// ```
 pub fn diff_forward(f : (Double) -> Double, x : Double) -> (Double, Double) {
   let a : Array[Double] = [0, 1, 2]
-  a.map_inplace(fn(n) { n * @builtin.machine_dbl_epsilon + x })
+  a.map_inplace(fn(n) { n * @internal.machine_dbl_epsilon + x })
   let d = a.map(fn(n) { f(n) })
   for k = 1; k < 4; k = k + 1 {
     for i = 0; i < 3 - k; i = i + 1 {
@@ -83,11 +83,11 @@ pub fn diff_forward(f : (Double) -> Double, x : Double) -> (Double, Double) {
     }
   }
   let mut a2 = @double.abs(d[0] + d[1] + d[2])
-  let c = 100.0 * @builtin.machine_sqrt_dbl_epsilon
+  let c = 100.0 * @internal.machine_sqrt_dbl_epsilon
   if a2 < c {
     a2 = c
   }
-  let mut h = (@builtin.machine_sqrt_dbl_epsilon / (2.0 * a2)).sqrt()
+  let mut h = (@internal.machine_sqrt_dbl_epsilon / (2.0 * a2)).sqrt()
   if h > c {
     h = c
   }
@@ -128,7 +128,7 @@ pub fn diff_forward(f : (Double) -> Double, x : Double) -> (Double, Double) {
 /// ```
 pub fn diff_central(f : (Double) -> Double, x : Double) -> (Double, Double) {
   let a : Array[Double] = [-2, -1, 0, 1]
-  a.map_inplace(fn(n) { n * @builtin.machine_dbl_epsilon + x })
+  a.map_inplace(fn(n) { n * @internal.machine_dbl_epsilon + x })
   let d = a.map(fn(n) { f(n) })
   for k = 1; k < 5; k = k + 1 {
     for i = 0; i < 4 - k; i = i + 1 {
@@ -136,11 +136,11 @@ pub fn diff_central(f : (Double) -> Double, x : Double) -> (Double, Double) {
     }
   }
   let mut a3 = @double.abs(d[0] + d[1] + d[2] + d[3])
-  let c = 100.0 * @builtin.machine_sqrt_dbl_epsilon
+  let c = 100.0 * @internal.machine_sqrt_dbl_epsilon
   if a3 < c {
     a3 = c
   }
-  let mut h = @double.pow(@builtin.machine_sqrt_dbl_epsilon / (2.0 * a3), 1.0 / 3.0)
+  let mut h = @double.pow(@internal.machine_sqrt_dbl_epsilon / (2.0 * a3), 1.0 / 3.0)
   if h > c {
     h = c
   }
