@@ -140,7 +140,10 @@ pub fn diff_central(f : (Double) -> Double, x : Double) -> (Double, Double) {
   if a3 < c {
     a3 = c
   }
-  let mut h = @double.pow(@internal.machine_sqrt_dbl_epsilon / (2.0 * a3), 1.0 / 3.0)
+  let mut h = @double.pow(
+    @internal.machine_sqrt_dbl_epsilon / (2.0 * a3),
+    1.0 / 3.0,
+  )
   if h > c {
     h = c
   }
