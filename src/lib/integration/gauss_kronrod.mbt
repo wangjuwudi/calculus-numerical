@@ -1,4 +1,39 @@
 ///|
+/// Performs adaptive Gauss-Kronrod quadrature integration on a given function
+/// over a specified interval.
+///
+/// Parameters:
+///
+/// * `order` : The order of the Gauss-Kronrod quadrature rule. This determines
+/// the number of evaluation points used.
+/// * `abscissas` : Array of Gauss-Kronrod nodes (evaluation points).
+/// * `gauss_weights` : Array of weights for the Gauss quadrature rule.
+/// * `kronrod_weights` : Array of weights for the Kronrod quadrature rule.
+/// * `integrand` : The function to be integrated. Takes a single Double
+/// parameter and returns a Double.
+/// * `lower_bound` : The lower bound of the integration interval.
+/// * `upper_bound` : The upper bound of the integration interval.
+///
+/// Returns a tuple containing:
+///
+/// * The approximation of the integral using Kronrod quadrature
+/// * The absolute value of the integral approximation
+/// * The absolute central difference approximation
+/// * The estimated error of the integration
+///
+/// Example:
+///
+/// ```
+/// test "gauss_kronrod" {
+///   // Integrate x^2 from 0 to 1
+///   let f = fn(x : Double) -> Double { x * x }
+///   let xgk = [0.0, 0.5773502691896257, 1.0]
+///   let wg = [0.8888888888888888, 0.5555555555555556]
+///   let wgk = [0.6521451548625461, 0.3478548451374538, 0.2469135802469136]
+///   let (result, _, _, error) = gauss_kronrod(3, xgk, wg, wgk, f, 0.0, 1.0)
+///   inspect!(@double.round(result * 1000.0) / 1000.0, content="0.333")
+/// }
+/// ```
 fn gauss_kronrod(
   n : Int,
   xgk : Array[Double],
