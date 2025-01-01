@@ -42,7 +42,9 @@ fn central_deriv(
     @internal.machine_dbl_epsilon +
     e3
   let a = @double.abs(r3 / h)
-  let b = @double.abs(r5 / h) * (@double.abs(x) / h) * @internal.machine_dbl_epsilon
+  let b = @double.abs(r5 / h) *
+    (@double.abs(x) / h) *
+    @internal.machine_dbl_epsilon
   let mut dy = a
   if a < b {
     dy = b
@@ -153,7 +155,9 @@ fn forward_deriv(
     ) *
     @internal.machine_dbl_epsilon
   let a = @double.abs(r2 / h)
-  let b = @double.abs(r4 / h) * @double.abs(x / h) * @internal.machine_dbl_epsilon
+  let b = @double.abs(r4 / h) *
+    @double.abs(x / h) *
+    @internal.machine_dbl_epsilon
   let mut dy = a
   if a < b {
     dy = b
