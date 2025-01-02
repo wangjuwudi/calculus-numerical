@@ -19,7 +19,7 @@
 ///
 /// Example:
 ///
-/// ```
+/// ```moonbit
 /// test "central_deriv" {
 ///   let f = fn(x : Double) { x * x } // f(x) = x^2, f'(x) = 2x
 ///   let (deriv, diff, error) = central_deriv(f, 2.0, 0.1)
@@ -73,7 +73,7 @@ fn central_deriv(
 ///
 /// Example:
 ///
-/// ```
+/// ```moonbit
 /// test "deriv_central" {
 ///   let f = fn(x : Double) { x * x } // f(x) = x^2, f'(x) = 2x
 ///   let (deriv, error) = deriv_central(f, 2.0, 0.1)
@@ -127,7 +127,7 @@ pub fn deriv_central(
 ///
 /// Example:
 ///
-/// ```
+/// ```moonbit
 /// test "forward_deriv" {
 ///   let f = fn(x : Double) { x * x } // f(x) = x^2, f'(x) = 2x
 ///   let (deriv, diff, error) = forward_deriv(f, 2.0, 0.1)
@@ -186,7 +186,7 @@ fn forward_deriv(
 ///
 /// Example:
 ///
-/// ```
+/// ```moonbit
 /// test "deriv_forward" {
 ///   let f = fn(x : Double) { x * x } // f(x) = x^2, f'(x) = 2x
 ///   let (deriv, error) = deriv_forward(f, 2.0, 0.1)
@@ -234,7 +234,7 @@ pub fn deriv_forward(
 ///
 /// Example:
 ///
-/// ```
+/// ```moonbit
 /// test "deriv_backward" {
 ///   let f = fn(x : Double) { x * x } // f(x) = x^2, f'(x) = 2x
 ///   let (deriv, error) = deriv_backward(f, 2.0, 0.1)

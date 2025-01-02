@@ -1,4 +1,29 @@
 ///|
+/// Rescales the absolute error estimate using both the magnitude of the result
+/// and the accumulation of roundoff errors. Implements sophisticated error
+/// rescaling that accounts for both the relative size of the error and numerical
+/// precision limitations.
+///
+/// Parameters:
+///
+/// * `error` : The initial error estimate to be rescaled.
+/// * `result_abs` : The absolute value of the computed result.
+/// * `result_asc` : The accumulation of roundoff errors from the computation
+/// sequence.
+///
+/// Returns a rescaled error value that takes into account both the relative
+/// magnitude of the error and machine precision limitations.
+///
+/// Example:
+///
+/// ```moonbit
+/// test "rescale_error" {
+///   let err = rescale_error(0.001, 1.0, 0.1)
+///   // The rescaled error will account for both the relative error size
+///   // and numerical precision constraints
+///   inspect!(err > 0.0, content="true")
+/// }
+/// ```
 pub fn rescale_error(
   err : Double,
   result_abs : Double,

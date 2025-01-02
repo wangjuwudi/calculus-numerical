@@ -15,7 +15,7 @@
 ///
 /// Example:
 ///
-/// ```
+/// ```moonbit
 /// test "pow_integer_exp" {
 ///   inspect!(pow_integer_exp(2.0, IntegerInt(3)), content="8.0")
 ///   inspect!(pow_integer_exp(2.0, IntegerInt(-2)), content="0.25")
