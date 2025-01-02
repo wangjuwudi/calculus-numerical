@@ -1,6 +1,17 @@
 package kcn-judu/calculus-numerical/lib/integration
 
 // Values
+fn kronrod_r15((Double) -> Double, Double, Double) -> (Double, Double, Double, Double)
+
+fn kronrod_r21((Double) -> Double, Double, Double) -> (Double, Double, Double, Double)
+
+fn kronrod_r31((Double) -> Double, Double, Double) -> (Double, Double, Double, Double)
+
+fn kronrod_r41((Double) -> Double, Double, Double) -> (Double, Double, Double, Double)
+
+fn kronrod_r51((Double) -> Double, Double, Double) -> (Double, Double, Double, Double)
+
+fn kronrod_r61((Double) -> Double, Double, Double) -> (Double, Double, Double, Double)
 
 // Types and methods
 

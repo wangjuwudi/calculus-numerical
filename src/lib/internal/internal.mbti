@@ -151,6 +151,8 @@ let math_sqrt_pi : Double
 
 fn pow_integer_exp(Double, Integer) -> Double
 
+fn rescale_error(Double, Double, Double) -> Double
+
 // Types and methods
 pub(all) enum Integer {
   IntegerInt(Int)
