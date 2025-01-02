@@ -18,7 +18,7 @@
 ///
 /// Example:
 ///
-/// ```
+/// ```moonbit
 /// test "diff_backward" {
 ///   let f = fn(x : Double) { x * x } // f(x) = x^2, f'(x) = 2x
 ///   let (derivative, error) = diff_backward(f, 2.0)
@@ -66,7 +66,7 @@ pub fn diff_backward(f : (Double) -> Double, x : Double) -> (Double, Double) {
 ///
 /// Example:
 ///
-/// ```
+/// ```moonbit
 /// test "diff_forward" {
 ///   let f = fn(x : Double) { x * x } // f(x) = x^2, f'(x) = 2x
 ///   let (derivative, error) = diff_forward(f, 2.0)
@@ -119,7 +119,7 @@ pub fn diff_forward(f : (Double) -> Double, x : Double) -> (Double, Double) {
 ///
 /// Example:
 ///
-/// ```
+/// ```moonbit
 /// test "diff_central" {
 ///   let f = fn(x : Double) { x * x } // f(x) = x^2, f'(x) = 2x
 ///   let (derivative, error) = diff_central(f, 2.0)
