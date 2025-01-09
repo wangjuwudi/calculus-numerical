@@ -1,14 +1,38 @@
-# Basic Computing Support<br>基本的计算支持
+# Short Term Aims<br>短期目标
 
 <br>
 
-## Trait Integral（Integral接口）
+## Feat
+
+<br>
+
+- Adaptive Gauss-Kronrod Quadrature
+- Complex Number Computing Utilities
+- Fourier Transform Utilities
+
+<br>
+
+## Doc
+
+<br>
+
+<br>
+
+# Long Term Aims<br>长期目标
+
+<br>
+
+## Basic Computing Support<br>基本的计算支持
+
+<br>
+
+### Trait Integral（Integral接口）
 
 Provides support for arbitrary-precision integer computations.
 
 支持任意精度的整数计算。
 
-## Exponentiation（幂运算）
+### Exponentiation（幂运算）
 
 Supports fast exponentiation for integers of arbitrary precision and floating-point numbers of arbitrary precision.
 
@@ -16,17 +40,17 @@ Supports fast exponentiation for integers of arbitrary precision and floating-po
 
 <br>
 
-# Basic Differential and Integral Functions<br>基本的微积分功能
+## Basic Differential and Integral Functions<br>基本的微积分功能
 
 <br>
 
-## Differentiation（微分）
+### Differentiation（微分）
 
 First-order derivatives, second-order derivatives, and higher-order derivatives. For example, the derivative of a function 𝑦 = 𝑓 ( 𝑥 ) y=f(x) can be approximated using finite difference methods such as forward difference, backward difference, and central difference.
 
 包括一阶导数、二阶导数乃至高阶导数的计算。例如，可以通过有限差分法（前向差分、后向差分和中心差分）来近似计算导数。
 
-## Integration（积分）
+### Integration（积分）
 
 Indefinite integrals and definite integrals. Analytical integration can be performed using the Newton-Leibniz formula, and numerical methods like the trapezoidal rule and Simpson's rule can be used for approximate calculations
 
@@ -34,23 +58,23 @@ Indefinite integrals and definite integrals. Analytical integration can be perfo
 
 <br>
 
-# Numerical Methods<br>数值方法
+## Numerical Methods<br>数值方法
 
 <br>
 
-## Interpolation（插值法）
+### Interpolation（插值法）
 
 Lagrange interpolation, spline interpolation, etc., which are used to construct smooth functions for further differentiation or integration.
 
 如拉格朗日插值、样条插值等，用于构造平滑函数以便进一步微分或积分。
 
-## Numerical Differentiation（数值微分）
+### Numerical Differentiation（数值微分）
 
 Euler's method, Runge-Kutta methods, etc., for solving ordinary differential equations (ODEs).
 
 如欧拉法、龙格-库塔法等，用于解决常微分方程（ODEs）的初值问题。
 
-## Numerical Integration（数值积分）
+### Numerical Integration（数值积分）
 
 Monte Carlo methods, Gaussian quadrature, etc., for solving complex numerical integration problems.
 
@@ -58,7 +82,7 @@ Monte Carlo methods, Gaussian quadrature, etc., for solving complex numerical in
 
 <br>
 
-# Special Functions<br>特殊函数
+## Special Functions<br>特殊函数
 
 <br>
 
@@ -67,3 +91,17 @@ Gamma function, Bessel functions, error functions, etc. These functions are ofte
 伽玛函数、贝塞尔函数、误差函数等，这些在高等数学和物理学中经常遇到的函数，它们的实现往往是解决特定微积分问题的关键。
 
 <br>
+
+# Late-stage Optimization Aims<br>后期（开发周期）优化
+
+<br>
+
+## Performance Optimization（性能优化）
+
+<br>
+
+### Recursive Optimization（递归优化）
+
+Refactor existing recursive functions to use tail recursion, improving performance and reducing stack space consumption.
+
+将现有的普通递归函数重构为尾递归，以提高性能并减少栈空间消耗。
