@@ -25,7 +25,7 @@
 ///   inspect!(@double.abs(derivative - 4.0) < error, content="true")
 /// }
 /// ```
-pub fn diff_backward(f : (Double) -> Double, x : Double) -> (Double, Double) {
+pub fn diff_backward(f : @internal.Func_Math, x : Double) -> (Double, Double) {
   let a : Array[Double] = [-2, -1, 0]
   a.map_inplace(fn(n) { n * @internal.machine_dbl_epsilon + x })
   let d = a.map(f)
@@ -73,7 +73,7 @@ pub fn diff_backward(f : (Double) -> Double, x : Double) -> (Double, Double) {
 ///   inspect!(@double.abs(derivative - 4.0) < error, content="true")
 /// }
 /// ```
-pub fn diff_forward(f : (Double) -> Double, x : Double) -> (Double, Double) {
+pub fn diff_forward(f : @internal.Func_Math, x : Double) -> (Double, Double) {
   let a : Array[Double] = [0, 1, 2]
   a.map_inplace(fn(n) { n * @internal.machine_dbl_epsilon + x })
   let d = a.map(fn(n) { f(n) })
@@ -126,7 +126,7 @@ pub fn diff_forward(f : (Double) -> Double, x : Double) -> (Double, Double) {
 ///   inspect!(@double.abs(derivative - 4.0) < error, content="true")
 /// }
 /// ```
-pub fn diff_central(f : (Double) -> Double, x : Double) -> (Double, Double) {
+pub fn diff_central(f : @internal.Func_Math, x : Double) -> (Double, Double) {
   let a : Array[Double] = [-2, -1, 0, 1]
   a.map_inplace(fn(n) { n * @internal.machine_dbl_epsilon + x })
   let d = a.map(fn(n) { f(n) })
