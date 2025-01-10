@@ -161,6 +161,9 @@ pub(all) enum Integer {
 }
 
 // Type aliases
+pub typealias Func_Math = (Double) -> Double
+
+pub typealias Quad_GK = ((Double) -> Double, Double, Double) -> (Double, Double, Double, Double)
 
 // Traits
 pub(open) trait Integral : Eq + Compare + Show {

@@ -1,6 +1,8 @@
 package kcn-judu/calculus-numerical/lib/integration
 
 // Values
+fn adap_quad_gk((Double) -> Double, ((Double) -> Double, Double, Double) -> (Double, Double, Double, Double), Double, Double, Double, Double, UInt) -> (Double, Double)
+
 fn kronrod_r15((Double) -> Double, Double, Double) -> (Double, Double, Double, Double)
 
 fn kronrod_r21((Double) -> Double, Double, Double) -> (Double, Double, Double, Double)
