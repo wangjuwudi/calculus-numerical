@@ -27,7 +27,7 @@
 /// }
 /// ```
 fn central_deriv(
-  f : (Double) -> Double,
+  f : @internal.Func_Math,
   x : Double,
   h : Double
 ) -> (Double, Double, Double) {
@@ -81,7 +81,7 @@ fn central_deriv(
 /// }
 /// ```
 pub fn deriv_central(
-  f : (Double) -> Double,
+  f : @internal.Func_Math,
   x : Double,
   h : Double
 ) -> (Double, Double) {
@@ -135,7 +135,7 @@ pub fn deriv_central(
 /// }
 /// ```
 fn forward_deriv(
-  f : (Double) -> Double,
+  f : @internal.Func_Math,
   x : Double,
   h : Double
 ) -> (Double, Double, Double) {
@@ -194,7 +194,7 @@ fn forward_deriv(
 /// }
 /// ```
 pub fn deriv_forward(
-  f : (Double) -> Double,
+  f : @internal.Func_Math,
   x : Double,
   h : Double
 ) -> (Double, Double) {
@@ -242,7 +242,7 @@ pub fn deriv_forward(
 /// }
 /// ```
 pub fn deriv_backward(
-  f : (Double) -> Double,
+  f : @internal.Func_Math,
   x : Double,
   h : Double
 ) -> (Double, Double) {

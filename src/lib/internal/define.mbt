@@ -1,4 +1,4 @@
-
+///|
 pub typealias Func_Math = (Double) -> Double
 
 ///|

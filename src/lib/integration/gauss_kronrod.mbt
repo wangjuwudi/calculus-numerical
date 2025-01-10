@@ -39,7 +39,7 @@ fn gauss_kronrod(
   xgk : Array[Double],
   wg : Array[Double],
   wgk : Array[Double],
-  f : (Double) -> Double,
+  f : @internal.Func_Math,
   a : Double,
   b : Double
 ) -> (Double, Double, Double, Double) {
@@ -124,7 +124,7 @@ fn gauss_kronrod(
 /// }
 /// ```
 pub fn kronrod_r15(
-  f : (Double) -> Double,
+  f : @internal.Func_Math,
   a : Double,
   b : Double
 ) -> (Double, Double, Double, Double) {
@@ -161,7 +161,7 @@ pub fn kronrod_r15(
 /// }
 /// ```
 pub fn kronrod_r21(
-  f : (Double) -> Double,
+  f : @internal.Func_Math,
   a : Double,
   b : Double
 ) -> (Double, Double, Double, Double) {
@@ -200,7 +200,7 @@ pub fn kronrod_r21(
 /// }
 /// ```
 pub fn kronrod_r31(
-  f : (Double) -> Double,
+  f : @internal.Func_Math,
   a : Double,
   b : Double
 ) -> (Double, Double, Double, Double) {
@@ -240,7 +240,7 @@ pub fn kronrod_r31(
 /// }
 /// ```
 pub fn kronrod_r41(
-  f : (Double) -> Double,
+  f : @internal.Func_Math,
   a : Double,
   b : Double
 ) -> (Double, Double, Double, Double) {
@@ -256,7 +256,7 @@ pub fn kronrod_r41(
 /// Parameters:
 ///
 /// * `integrand` : A function that maps a real number to a real number (type
-/// `(Double) -> Double`). This is the function to be integrated.
+/// `@internal.Func_Math`). This is the function to be integrated.
 /// * `lower_bound` : The lower limit of the integration interval (type
 /// `Double`).
 /// * `upper_bound` : The upper limit of the integration interval (type
@@ -281,7 +281,7 @@ pub fn kronrod_r41(
 /// }
 /// ```
 pub fn kronrod_r51(
-  f : (Double) -> Double,
+  f : @internal.Func_Math,
   a : Double,
   b : Double
 ) -> (Double, Double, Double, Double) {
@@ -320,7 +320,7 @@ pub fn kronrod_r51(
 /// }
 /// ```
 pub fn kronrod_r61(
-  f : (Double) -> Double,
+  f : @internal.Func_Math,
   a : Double,
   b : Double
 ) -> (Double, Double, Double, Double) {
