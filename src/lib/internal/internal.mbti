@@ -149,6 +149,10 @@ let math_sqrt_3 : Double
 
 let math_sqrt_pi : Double
 
+fn max[T : Compare](T, T) -> T
+
+fn min[T : Compare](T, T) -> T
+
 fn pow_integer_exp(Double, Integer) -> Double
 
 fn rescale_error(Double, Double, Double) -> Double
