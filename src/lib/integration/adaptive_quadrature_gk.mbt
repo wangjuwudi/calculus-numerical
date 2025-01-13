@@ -37,11 +37,7 @@ pub fn adap_quad_gk(
     let mut b_i = 0.0
     let mut r_i = 0.0
     let mut e_i = 0.0
-    let (a, b, r, e) = retrieve(workspace)
-    a_i = a
-    b_i = b
-    r_i = r
-    e_i = e
+    let (a_i, b_i, r_i, e_i) = retrieve(workspace)
     let a_1 = a_i
     let b_1 = 0.5 * (a_i + b_i)
     let a_2 = b_1
@@ -74,11 +70,6 @@ pub fn adap_quad_gk(
     update_workspace(
       workspace, a_1, b_1, area_1, error_1, a_2, b_2, area_2, error_2,
     )
-    let (a_, b_, r_, e_) = retrieve(workspace)
-    a_i = a_
-    b_i = b_
-    r_i = r_
-    e_i = e_
     iteration = iteration + 1
   }
   result = @internal.arr_sum_dbl(workspace.r_list)
