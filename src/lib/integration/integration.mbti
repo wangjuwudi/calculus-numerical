@@ -1,7 +1,11 @@
 package kcn-judu/calculus-numerical/lib/integration
 
 // Values
-fn adap_quad_gk((Double) -> Double, ((Double) -> Double, Double, Double) -> (Double, Double, Double, Double), Double, Double, Double, Double, UInt) -> (Double, Double)
+fn adap_quad_gk((Double) -> Double, ((Double) -> Double, Double, Double) -> (Double, Double, Double, Double), Double, Double, Double, Double, Int) -> Result[(Double, Double), String]
+
+fn alloc_workspace(Int) -> IntegrationWorkspace
+
+fn init_workspace(IntegrationWorkspace, Double, Double, Double, Double) -> Unit
 
 fn kronrod_r15((Double) -> Double, Double, Double) -> (Double, Double, Double, Double)
 
@@ -15,7 +19,25 @@ fn kronrod_r51((Double) -> Double, Double, Double) -> (Double, Double, Double, D
 
 fn kronrod_r61((Double) -> Double, Double, Double) -> (Double, Double, Double, Double)
 
+fn retrieve(IntegrationWorkspace) -> (Double, Double, Double, Double)
+
+fn subinterval_check(Double, Double, Double) -> Bool
+
+fn update_workspace(IntegrationWorkspace, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
+
 // Types and methods
+pub struct IntegrationWorkspace {
+  limit : Int
+  size : Int
+  i : Int
+  maximum_level : Int
+  a_list : Array[Double]
+  b_list : Array[Double]
+  r_list : Array[Double]
+  e_list : Array[Double]
+  order : Array[Int]
+  level : Array[Int]
+}
 
 // Type aliases
 
