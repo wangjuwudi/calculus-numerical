@@ -1,6 +1,8 @@
 package kcn-judu/calculus-numerical/lib/internal
 
 // Values
+fn arr_sum_dbl(Array[Double]) -> Double
+
 let integer_one : Integer
 
 let integer_zero : Integer

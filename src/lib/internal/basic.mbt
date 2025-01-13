@@ -15,3 +15,12 @@ pub fn min[T : Compare](a : T, b : T) -> T {
     b
   }
 }
+
+///|
+pub fn arr_sum_dbl(arr : Array[Double]) -> Double {
+  let mut sum = 0.0
+  for x in arr {
+    sum = sum + x
+  }
+  sum
+}
