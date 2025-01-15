@@ -33,10 +33,6 @@ pub fn adap_quad_gk(
   let mut roundoff_type_1 = 0
   let mut roundoff_type_2 = 0
   while iteration < limit && error_type == 0 && errsum > tolerance {
-    let mut a_i = 0.0
-    let mut b_i = 0.0
-    let mut r_i = 0.0
-    let mut e_i = 0.0
     let (a_i, b_i, r_i, e_i) = retrieve(workspace)
     let a_1 = a_i
     let b_1 = 0.5 * (a_i + b_i)
