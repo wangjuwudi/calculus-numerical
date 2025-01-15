@@ -1,10 +1,7 @@
 # CALCULUS-NUMERICAL
+[![](https://img.shields.io/badge/Maintainer-KCN--judu-pink)](https://github.com/KCN-judu) [![](https://img.shields.io/badge/License-MIT-blue)](https://github.com/moonbit-community/calculus-numerical/blob/main/LICENSE) ![](https://img.shields.io/badge/State-active-success)
 
-Author: KCN-judu
-
-License: MIT
-
-![STATE](https://img.shields.io/badge/STATE-ACTIVE-119F22?style=for-the-badge#pic_left)
+<br>
 
 # Content（目录）
 
@@ -43,7 +40,7 @@ First, please take a look at the `TODO.md` file or the current list of issues to
 
 Next, fork the project and create a new branch in your personal repository. This allows you to work on your changes without affecting the main project.
 
-While coding, please follow the guidelines and coding conventions outlined in the `CONTRIBUTE.md` file. If your changes involve adding new features or fixing bugs, be sure to thoroughly test your code to ensure everything runs smoothly.
+While coding, please follow the guidelines and coding conventions outlined in the `CONTRIBUTING.md` file. If your changes involve adding new features or fixing bugs, be sure to thoroughly test your code to ensure everything runs smoothly.
 
 Once you’re done, submit a pull request (PR) with a clear description of your changes. This helps us understand what you’ve worked on and speeds up the review process.
 
@@ -82,7 +79,7 @@ __*从第一个测试版本正式发布开始，会保证英文和中文文档�
 
 接着，Fork我们的项目，并在你的个人仓库中创建一个新的分支。这样，你就可以在自己的分支上开始进行开发工作，而不会影响到主项目的进展。
 
-在编码过程中，请尽量遵循`CONTRIBUTE.md`中提供的代码风格和规范。如果你的修改涉及到新功能或修复bug，请确保进行充分的测试，确保一切正常运行。
+在编码过程中，请尽量遵循`CONTRIBUTING.md`中提供的代码风格和规范。如果你的修改涉及到新功能或修复bug，请确保进行充分的测试，确保一切正常运行。
 
 完成后，请提交你的PR，并在提交时提供一个清晰的描述，帮助我们了解你所做的更改。这样有助于更快地进行代码审查和合并。
 
