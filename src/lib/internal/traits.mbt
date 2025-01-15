@@ -17,11 +17,16 @@ pub impl Integral for Int64 with to_integer(self) {
 
 ///|
 pub impl Integral for BigInt with to_integer(self) {
-  if self == 0 {
+  if self.is_zero() {
     integer_zero
   } else if self == 1 {
     integer_one
-  } else {
+  } else if self <=  2147483647N && self >= -2147483648N {
+    IntegerInt(self.to_int())
+  } else if self <= 9223372036854775807N && self >= -9223372036854775808N {
+    IntegerInt64(self.to_int64())
+  }
+  else {
     Integer(self)
   }
 }
