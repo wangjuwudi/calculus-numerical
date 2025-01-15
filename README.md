@@ -8,9 +8,9 @@ License: MIT
 
 # Content（目录）
 
-- __Introduction（简介）__[en_US](#introduction)|[zh_CN](#introduction-zh)
-- __Project Progress（项目进度）__[en_US](#project-progress)|[zh_CN](#project-progress-zh)
-- __How to Contribute（如何参与贡献）__[en_US](#how-to-contribute)|[zh_CN](#how-to-contribute-zh)
+- __Introduction（简介）__[en_US](#introduction)|[zh_CN](#简介)
+- __Project Progress（项目进度）__[en_US](#project-progress)|[zh_CN](#项目进度)
+- __How to Contribute（如何参与贡献）__[en_US](#how-to-contribute)|[zh_CN](#如何参与贡献)
 
 <br>
 
@@ -53,7 +53,7 @@ Thank you once again for your time and effort! Every contribution makes a big di
 
 <br>
 
-# 简介{#introduction-zh}
+# 简介
 
 这是一个使用[__MoonBit__](https://www.moonbitlang.cn)编写的微积分数值求解库，旨在填补MoonBit生态在科学计算领域的空白。
 
@@ -63,7 +63,7 @@ __*从第一个测试版本正式发布开始，会保证英文和中文文档�
 
 <br>
 
-# 项目进度{#project-progress-zh}
+# 项目进度
 
 - __[LATEST]__ 25.01.13: 使用 __高斯求积和克龙罗德扩展__ 的自适应积分.
 - 25.01.12: 诸如 `min[T:Compare](T, T) -> T` 和 `max[T:Compare](T, T) -> T` 的基本方法. 
@@ -74,7 +74,7 @@ __*从第一个测试版本正式发布开始，会保证英文和中文文档�
 
 <br>
 
-# 如何参与贡献{#how-to-contribute-zh}
+# 如何参与贡献
 
 我们非常欢迎社区、外部开发者以及个人爱好者的贡献！无论你是想解决某个bug、增加新功能，还是改进文档，都非常欢迎你的参与。为了帮助你顺利贡献，以下是一些简单的步骤：
 
