@@ -21,12 +21,11 @@ pub impl Integral for BigInt with to_integer(self) {
     integer_zero
   } else if self == 1 {
     integer_one
-  } else if self <=  2147483647N && self >= -2147483648N {
+  } else if self <= 2147483647N && self >= -2147483648N {
     IntegerInt(self.to_int())
   } else if self <= 9223372036854775807N && self >= -9223372036854775808N {
     IntegerInt64(self.to_int64())
-  }
-  else {
+  } else {
     Integer(self)
   }
 }
