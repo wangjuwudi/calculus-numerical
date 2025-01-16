@@ -13,7 +13,7 @@ pub struct IntegrationWorkspace {
 }
 
 ///|
-pub fn alloc_workspace(limit : Int) -> IntegrationWorkspace {
+pub fn IntegrationWorkspace::new(limit : Int) -> IntegrationWorkspace {
   {
     limit,
     size: 0,
@@ -29,7 +29,7 @@ pub fn alloc_workspace(limit : Int) -> IntegrationWorkspace {
 }
 
 ///|
-pub fn init_workspace(
+pub fn IntegrationWorkspace::init(
   workspace : IntegrationWorkspace,
   a : Double,
   b : Double,
@@ -80,7 +80,7 @@ fn qpsrt(workspace : IntegrationWorkspace) -> Unit {
 }
 
 ///|
-pub fn update_workspace(
+pub fn IntegrationWorkspace::update(
   workspace : IntegrationWorkspace,
   a_1 : Double,
   b_1 : Double,
@@ -122,7 +122,7 @@ pub fn update_workspace(
 }
 
 ///|
-pub fn retrieve(
+pub fn IntegrationWorkspace::retrieve(
   workspace : IntegrationWorkspace
 ) -> (Double, Double, Double, Double) {
   (
@@ -134,7 +134,11 @@ pub fn retrieve(
 }
 
 ///|
-pub fn subinterval_check(a_1 : Double, a_2 : Double, b_2 : Double) -> Bool {
+pub fn IntegrationWorkspace::subinterval_check(
+  a_1 : Double,
+  a_2 : Double,
+  b_2 : Double
+) -> Bool {
   let tmp = (1.0 + 100.0 * @internal.machine_dbl_epsilon) *
     (@double.abs(a_2) + 1000.0 * @internal.machine_dbl_min)
   @double.abs(a_1) <= tmp && @double.abs(b_2) <= tmp

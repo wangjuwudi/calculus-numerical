@@ -24,8 +24,8 @@ pub fn adap_quad_gk(
     limit != 1 else {
     Err("E_MAX_ITER")
   }
-  let workspace = alloc_workspace(limit)
-  init_workspace(workspace, a, b, result_0, abserr_0)
+  let workspace = new(limit)
+  init(workspace, a, b, result_0, abserr_0)
   let mut area = result_0
   let mut errsum = abserr_0
   iteration = 1
@@ -63,9 +63,7 @@ pub fn adap_quad_gk(
         error_type = 3
       }
     }
-    update_workspace(
-      workspace, a_1, b_1, area_1, error_1, a_2, b_2, area_2, error_2,
-    )
+    update(workspace, a_1, b_1, area_1, error_1, a_2, b_2, area_2, error_2)
     iteration = iteration + 1
   }
   result = @internal.arr_sum_dbl(workspace.r_list)
