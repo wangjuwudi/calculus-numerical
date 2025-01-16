@@ -41,7 +41,7 @@ pub fn MatrixDbl::filled_matrix(
 
 ///|
 pub fn MatrixDbl::zero_matrix(row : Int, col : Int) -> MatrixDbl {
-  filled_matrix(row, col, 0.0)
+  MatrixDbl::filled_matrix(row, col, 0.0)
 }
 
 ///|
@@ -116,7 +116,7 @@ pub fn MatrixDbl::mul_elements(
   guard self.col == other.col && self.row == other.row
   let stride_self = self.stride
   let stride_other = other.stride
-  let matrix_mul = new(self.row, self.col)
+  let matrix_mul = MatrixDbl::new(self.row, self.col)
   for i = 0; i < self.row; i = i + 1 {
     for j = 0; j < self.col; j = j + 1 {
       matrix_mul.data.push(
@@ -151,7 +151,7 @@ pub fn MatrixDbl::div_elements(
   guard self.col == other.col && self.row == other.row
   let stride_self = self.stride
   let stride_other = other.stride
-  let matrix_div = new(self.row, self.col)
+  let matrix_div = MatrixDbl::new(self.row, self.col)
   for i = 0; i < self.row; i = i + 1 {
     for j = 0; j < self.col; j = j + 1 {
       matrix_div.data.push(
@@ -182,7 +182,7 @@ pub fn MatrixDbl::div_elements_inplace(
 fn MatrixDbl::std_mul(self : MatrixDbl, other : MatrixDbl) -> MatrixDbl {
   let stride_self = self.stride
   let stride_other = other.stride
-  let matrix_mul = new(self.row, other.col)
+  let matrix_mul = MatrixDbl::new(self.row, other.col)
   for i = 0; i < self.row; i = i + 1 {
     for j = 0; j < other.col; j = j + 1 {
       let mut sum = 0.0
@@ -201,7 +201,7 @@ pub fn op_add(self : MatrixDbl, other : MatrixDbl) -> MatrixDbl {
   guard self.col == other.col && self.row == other.row
   let stride_self = self.stride
   let stride_other = other.stride
-  let matrix_add = new(self.row, self.col)
+  let matrix_add = MatrixDbl::new(self.row, self.col)
   for i = 0; i < self.row; i = i + 1 {
     for j = 0; j < self.col; j = j + 1 {
       matrix_add.data.push(
@@ -217,7 +217,7 @@ pub fn op_sub(self : MatrixDbl, other : MatrixDbl) -> MatrixDbl {
   guard self.col == other.col && self.row == other.row
   let stride_self = self.stride
   let stride_other = other.stride
-  let matrix_sub = new(self.row, self.col)
+  let matrix_sub = MatrixDbl::new(self.row, self.col)
   for i = 0; i < self.row; i = i + 1 {
     for j = 0; j < self.col; j = j + 1 {
       matrix_sub.data.push(
@@ -231,5 +231,5 @@ pub fn op_sub(self : MatrixDbl, other : MatrixDbl) -> MatrixDbl {
 ///|
 pub fn op_mul(self : MatrixDbl, other : MatrixDbl) -> MatrixDbl {
   guard self.col == other.row
-  std_mul(self, other)
+  MatrixDbl::std_mul(self, other)
 }
