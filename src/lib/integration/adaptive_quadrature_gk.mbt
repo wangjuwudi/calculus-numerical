@@ -24,8 +24,8 @@ pub fn adap_quad_gk(
     limit != 1 else {
     Err("E_MAX_ITER")
   }
-  let workspace = new(limit)
-  init(workspace, a, b, result_0, abserr_0)
+  let workspace = IntegrationWorkspace::new(limit)
+  IntegrationWorkspace::init(workspace, a, b, result_0, abserr_0)
   let mut area = result_0
   let mut errsum = abserr_0
   iteration = 1
@@ -33,7 +33,7 @@ pub fn adap_quad_gk(
   let mut roundoff_type_1 = 0
   let mut roundoff_type_2 = 0
   while iteration < limit && error_type == 0 && errsum > tolerance {
-    let (a_i, b_i, r_i, e_i) = retrieve(workspace)
+    let (a_i, b_i, r_i, e_i) = IntegrationWorkspace::retrieve(workspace)
     let a_1 = a_i
     let b_1 = 0.5 * (a_i + b_i)
     let a_2 = b_1
@@ -59,11 +59,13 @@ pub fn adap_quad_gk(
       if roundoff_type_1 >= 6 || roundoff_type_2 >= 20 {
         error_type = 2
       }
-      if subinterval_check(a_1, a_2, b_2) {
+      if IntegrationWorkspace::subinterval_check(a_1, a_2, b_2) {
         error_type = 3
       }
     }
-    update(workspace, a_1, b_1, area_1, error_1, a_2, b_2, area_2, error_2)
+    IntegrationWorkspace::update(
+      workspace, a_1, b_1, area_1, error_1, a_2, b_2, area_2, error_2,
+    )
     iteration = iteration + 1
   }
   result = @internal.arr_sum_dbl(workspace.r_list)
