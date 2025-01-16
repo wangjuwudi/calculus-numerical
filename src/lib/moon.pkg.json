@@ -3,6 +3,7 @@
 		"kcn-judu/calculus-numerical/lib/internal",
 		"kcn-judu/calculus-numerical/lib/diff",
 		"kcn-judu/calculus-numerical/lib/deriv",
-		"kcn-judu/calculus-numerical/lib/integration"
+		"kcn-judu/calculus-numerical/lib/integration",
+		"kcn-judu/calculus-numerical/lib/matrix"
 	]
 }

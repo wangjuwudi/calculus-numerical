@@ -1,0 +1,37 @@
+package kcn-judu/calculus-numerical/lib/matrix
+
+// Values
+
+// Types and methods
+pub(all) struct MatrixDbl {
+  data : Array[Double]
+  col : Int
+  row : Int
+  stride : Int
+}
+impl MatrixDbl {
+  add_constant(Self, Double) -> Self
+  add_constant_inplace(Self, Double) -> Unit
+  add_diagonal(Self, Double) -> Self
+  add_diagonal_inplace(Self, Double) -> Unit
+  at(Self, Int, Int) -> Double
+  div_elements(Self, Self) -> Self
+  div_elements_inplace(Self, Self) -> Unit
+  filled_matrix(Int, Int, Double) -> Self
+  map(Self, (Double) -> Double) -> Self
+  map_inplace(Self, (Double) -> Double) -> Unit
+  mul_elements(Self, Self) -> Self
+  mul_elements_inplace(Self, Self) -> Unit
+  new(Int, Int) -> Self
+  op_add(Self, Self) -> Self
+  op_mul(Self, Self) -> Self
+  op_sub(Self, Self) -> Self
+  scale(Self, Double) -> Self
+  scale_inplace(Self, Double) -> Unit
+  zero_matrix(Int, Int) -> Self
+}
+
+// Type aliases
+
+// Traits
+
