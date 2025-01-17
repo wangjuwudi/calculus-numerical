@@ -9,14 +9,13 @@ pub(all) struct MatrixDbl {
 ///|
 pub fn MatrixDbl::new(row : Int, col : Int, stride~ : Int = col) -> MatrixDbl {
   guard row > 0 && col > 0
-  //let stride = col
   let data : Array[Double] = []
   { data, col, row, stride }
 }
 
 ///|
 pub fn MatrixDbl::at(self : MatrixDbl, row : Int, col : Int) -> Double {
-  guard row < self.row && col < self.col
+  guard row < self.row && col < self.col && row >= 0 && col >= 0
   let index = row * self.stride + col
   guard index < self.data.length()
   self.data[index]
