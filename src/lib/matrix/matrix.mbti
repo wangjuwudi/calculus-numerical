@@ -22,7 +22,7 @@ impl MatrixDbl {
   map_inplace(Self, (Double) -> Double) -> Unit
   mul_elements(Self, Self) -> Self
   mul_elements_inplace(Self, Self) -> Unit
-  new(Int, Int) -> Self
+  new(Int, Int, stride~ : Int = ..) -> Self
   op_add(Self, Self) -> Self
   op_mul(Self, Self) -> Self
   op_sub(Self, Self) -> Self
@@ -30,6 +30,7 @@ impl MatrixDbl {
   scale_inplace(Self, Double) -> Unit
   zero_matrix(Int, Int) -> Self
 }
+impl Show for MatrixDbl
 
 // Type aliases
 
