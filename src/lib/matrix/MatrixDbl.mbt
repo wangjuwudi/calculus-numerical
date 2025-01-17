@@ -4,12 +4,12 @@ pub(all) struct MatrixDbl {
   col : Int
   row : Int
   mut stride : Int
-}
+} derive(Show)
 
 ///|
-pub fn MatrixDbl::new(row : Int, col : Int) -> MatrixDbl {
+pub fn MatrixDbl::new(row : Int, col : Int, stride~ : Int = col) -> MatrixDbl {
   guard row > 0 && col > 0
-  let stride = col
+  //let stride = col
   let data : Array[Double] = []
   { data, col, row, stride }
 }
