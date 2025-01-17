@@ -1,0 +1,38 @@
+package kcn-judu/calculus-numerical/lib/vector
+
+// Values
+
+// Types and methods
+pub(all) struct VectorDbl {
+  data : Array[Double]
+  size : Int
+  stride : Int
+}
+impl VectorDbl {
+  add_constant(Self, Double) -> Self
+  add_constant_inplace(Self, Double) -> Unit
+  add_inplace(Self, Self) -> Unit
+  at(Self, Int) -> Double
+  ax_plus_by(Self, Self, Double, Double) -> Self
+  ax_plus_by_inplace(Self, Self, Double, Double) -> Unit
+  div_inplace(Self, Self) -> Unit
+  filled_vector(Int, Double) -> Self
+  map(Self, (Double) -> Double) -> Self
+  map_inplace(Self, (Double) -> Double) -> Unit
+  mul_inplace(Self, Self) -> Unit
+  new(Int, stride~ : Int = ..) -> Self
+  op_add(Self, Self) -> Self
+  op_div(Self, Self) -> Self
+  op_mul(Self, Self) -> Self
+  op_sub(Self, Self) -> Self
+  scale(Self, Double) -> Self
+  scale_inplace(Self, Double) -> Unit
+  sub_inplace(Self, Self) -> Unit
+  sum(Self) -> Double
+  zero_vector(Int) -> Self
+}
+
+// Type aliases
+
+// Traits
+
