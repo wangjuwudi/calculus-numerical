@@ -1,0 +1,27 @@
+package kcn-judu/calculus-numerical/lib/complex
+
+// Values
+
+// Types and methods
+pub(all) struct Complex {
+  re : Double
+  im : Double
+}
+impl Complex {
+  abs(Self) -> Double
+  abs_sqr(Self) -> Double
+  arg(Self) -> Double
+  native_pack(Double, Double, Array[Double], Int) -> Unit
+  new(Double, Double) -> Self
+  pack(Self, Array[Double], Int) -> Unit
+  polar(Double, Double) -> Self
+  set(Self, Double, Double) -> Unit
+  set_im(Self, Double) -> Unit
+  set_re(Self, Double) -> Unit
+}
+impl Eq for Complex
+
+// Type aliases
+
+// Traits
+
