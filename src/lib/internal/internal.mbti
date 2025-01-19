@@ -3,6 +3,8 @@ package kcn-judu/calculus-numerical/lib/internal
 // Values
 fn arr_sum_dbl(Array[Double]) -> Double
 
+fn hypot(Double, Double) -> Double
+
 let integer_one : Integer
 
 let integer_zero : Integer
@@ -158,6 +160,8 @@ fn min[T : Compare](T, T) -> T
 fn pow_integer_exp(Double, Integer) -> Double
 
 fn rescale_error(Double, Double, Double) -> Double
+
+fn sqrt(Double) -> Double
 
 // Types and methods
 pub(all) enum Integer {
