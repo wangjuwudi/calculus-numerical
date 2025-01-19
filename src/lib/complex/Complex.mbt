@@ -36,6 +36,7 @@ pub fn Complex::native_pack(
   arr : Array[Double],
   offset : Int
 ) -> Unit {
+  guard offset >= 0 && offset < arr.length() / 2
   arr[2 * offset] = re
   arr[2 * offset + 1] = im
 }
@@ -54,7 +55,7 @@ pub fn Complex::polar(r : Double, theta : Double) -> Complex {
 
 ///|
 pub fn Complex::arg(self : Complex) -> Double {
-  guard self.re != 0.0 || self.im != 0.0
+  guard self.re != 0.0 || self.im != 0.0 else { 0.0 }
   @math.atan2(self.im, self.re)
 }
 
