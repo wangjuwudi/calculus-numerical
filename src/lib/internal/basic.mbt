@@ -33,7 +33,7 @@ pub fn sqrt(x : Double) -> Double {
   let epsilon = 0.0000001
   while diff > epsilon {
     let new_guess = (guess + x / guess) / 2.0
-    diff = guess - new_guess
+    diff = @double.abs(guess - new_guess)
     guess = new_guess
   }
   guess
