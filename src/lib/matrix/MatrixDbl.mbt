@@ -109,6 +109,34 @@ pub fn MatrixDbl::add_diagonal_inplace(
 }
 
 ///|
+pub fn MatrixDbl::scale_col_inplace(
+  self : MatrixDbl,
+  scalar : @vector.VectorDbl
+) -> Unit {
+  guard self.col == scalar.size
+  for i = 0; i < self.row; i = i + 1 {
+    for j = 0; j < self.col; j = j + 1 {
+      self.data[i * self.stride + j] = self.data[i * self.stride + j] *
+        scalar.data[j]
+    }
+  }
+}
+
+///|
+pub fn MatrixDbl::scale_row_inplace(
+  self : MatrixDbl,
+  scalar : @vector.VectorDbl
+) -> Unit {
+  guard self.row == scalar.size
+  for i = 0; i < self.row; i = i + 1 {
+    for j = 0; j < self.col; j = j + 1 {
+      self.data[i * self.stride + j] = self.data[i * self.stride + j] *
+        scalar.data[i]
+    }
+  }
+}
+
+///|
 pub fn MatrixDbl::mul_elements(
   self : MatrixDbl,
   other : MatrixDbl
@@ -258,6 +286,69 @@ pub fn MatrixDbl::zero_matrix(row : Int, col : Int) -> MatrixDbl {
   MatrixDbl::filled_matrix(row, col, 0.0)
 }
 
+//prop
+///|
+pub impl Eq for MatrixDbl with op_equal(self : MatrixDbl, other : MatrixDbl) -> Bool {
+  self.row == other.row && self.col == other.col && self.data == other.data
+}
+
+///|
+pub fn MatrixDbl::is_null(self : MatrixDbl) -> Bool {
+  let n = self.row * self.col
+  for i = 0; i < n; i = i + 1 {
+    if self.data[i] != 0.0 {
+      return false
+    }
+  }
+  true
+}
+
+///|
+pub fn MatrixDbl::is_pos(self : MatrixDbl) -> Bool {
+  let n = self.row * self.col
+  for i = 0; i < n; i = i + 1 {
+    if self.data[i] <= 0.0 {
+      return false
+    }
+  }
+  true
+}
+
+///|
+pub fn MatrixDbl::is_neg(self : MatrixDbl) -> Bool {
+  let n = self.row * self.col
+  for i = 0; i < n; i = i + 1 {
+    if self.data[i] >= 0.0 {
+      return false
+    }
+  }
+  true
+}
+
+///|
+pub fn MatrixDbl::is_non_neg(self : MatrixDbl) -> Bool {
+  let n = self.row * self.col
+  for i = 0; i < n; i = i + 1 {
+    if self.data[i] < 0.0 {
+      return false
+    }
+  }
+  true
+}
+
+///|
+pub fn MatrixDbl::norm_1(self : MatrixDbl) -> Double {
+  let mut max_sum = 0.0
+  for j = 0; j < self.col; j = j + 1 {
+    let mut sum = 0.0
+    for i = 0; i < self.row; i = i + 1 {
+      sum = sum + self.data[i * self.stride + j]
+    }
+    max_sum = @internal.max(max_sum, sum)
+  }
+  max_sum
+}
+
 //vectorize
 ///|
 pub fn MatrixDbl::row_vec(self : MatrixDbl, row : Int) -> @vector.VectorDbl {
@@ -374,11 +465,8 @@ pub fn MatrixDbl::op_as_view(
   guard view_mode == ViewMode::SuperDiagonal ||
     view_mode == ViewMode::SubDiagonal ||
     view_mode == ViewMode::Diagonal ||
-    (
-      index >= 0 &&
-      view_mode == ViewMode::Row ||
-      view_mode == ViewMode::Col
-    )
+    (index >= 0 && index < self.row && view_mode == ViewMode::Row) ||
+    (index >= 0 && index < self.col && view_mode == ViewMode::Col)
   MatrixViewDbl::{ matrix: self, index, start: 0, num: 0, view_mode }
 }
 
@@ -409,4 +497,72 @@ pub fn MatrixDbl::view(
     view_mode == ViewMode::SubDiagonal ||
     view_mode == ViewMode::SuperDiagonal
   MatrixViewDbl::{ matrix: self, index, start, num, view_mode }
+}
+
+//view oper
+
+///|
+pub fn MatrixViewDbl::map_inplace(
+  self : MatrixViewDbl,
+  f : (Double) -> Double
+) -> Unit {
+  match self.view_mode {
+    ViewMode::Row =>
+      for i = 0; i < self.matrix.col; i = i + 1 {
+        self.matrix.data[self.index * self.matrix.stride + i] = f(
+          self.matrix.data[self.index * self.matrix.stride + i],
+        )
+      }
+    ViewMode::Col =>
+      for i = 0; i < self.matrix.row; i = i + 1 {
+        self.matrix.data[i * self.matrix.stride + self.index] = f(
+          self.matrix.data[i * self.matrix.stride + self.index],
+        )
+      }
+    ViewMode::Diagonal => {
+      let short_side = @internal.min(self.matrix.row, self.matrix.col)
+      for i = 0; i < short_side; i = i + 1 {
+        self.matrix.data[i * self.matrix.stride + i] = f(
+          self.matrix.data[i * self.matrix.stride + i],
+        )
+      }
+    }
+    ViewMode::SubDiagonal => {
+      let short_side = @internal.min(self.matrix.row, self.matrix.col)
+      for i = 0; i < short_side - 1; i = i + 1 {
+        self.matrix.data[(i + 1) * self.matrix.stride + i] = f(
+          self.matrix.data[(i + 1) * self.matrix.stride + i],
+        )
+      }
+    }
+    ViewMode::SuperDiagonal => {
+      let short_side = @internal.min(self.matrix.row, self.matrix.col)
+      for i = 0; i < short_side - 1; i = i + 1 {
+        self.matrix.data[i * self.matrix.stride + (i + 1)] = f(
+          self.matrix.data[i * self.matrix.stride + (i + 1)],
+        )
+      }
+    }
+    ViewMode::SubRow =>
+      for i = 0; i < self.num; i = i + 1 {
+        self.matrix.data[self.index * self.matrix.stride + self.start + i] = f(
+          self.matrix.data[self.index * self.matrix.stride + self.start + i],
+        )
+      }
+    ViewMode::SubCol =>
+      for i = 0; i < self.num; i = i + 1 {
+        self.matrix.data[(self.start + i) * self.matrix.stride + self.index] = f(
+          self.matrix.data[(self.start + i) * self.matrix.stride + self.index],
+        )
+      }
+  }
+}
+
+///|
+pub fn MatrixViewDbl::scale_view(
+  self : MatrixViewDbl,
+  scalar : Double
+) -> MatrixViewDbl {
+  self.map_inplace(fn(x) -> Double { x * scalar })
+  self
 }
