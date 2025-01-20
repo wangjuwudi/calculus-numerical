@@ -1,4 +1,4 @@
-package kcn-judu/calculus-numerical/lib/diff
+package KCN-judu/calculus-numerical/lib/diff
 
 // Values
 fn diff_backward((Double) -> Double, Double) -> (Double, Double)

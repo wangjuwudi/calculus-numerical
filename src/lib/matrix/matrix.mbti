@@ -1,6 +1,6 @@
-package kcn-judu/calculus-numerical/lib/matrix
+package KCN-judu/calculus-numerical/lib/matrix
 
-alias @kcn-judu/calculus-numerical/lib/vector as @vector
+alias @KCN-judu/calculus-numerical/lib/vector as @vector
 
 // Values
 
