@@ -23,12 +23,22 @@ __*Starting from the first official beta release, the completeness of the Englis
 
 # Project Progress
 
-- __[LATEST]__ 25.01.13: adaptive quadrature using __Gauss quadrature & Kronrod extension__.
-- 25.01.12: basic functions such as `min[T:Compare](T, T) -> T`  and `max[T:Compare](T, T) -> T`. 
-- 25.01.11: type alias for long func signature, such as `Func_Math` and `Quad_GK`.
-- 25.01.02: quadrature using __Gauss quadrature & Kronrod extension__.
-- 24.12.30: derivative and differential using __forward, backward and central diff__.
-- 24.12.29: `Integer` type accept all kinds of integer, quick pow function `pow_integer_exp()` for `Integer` exp.
+**[LATEST]** 25.01.20: Defined the `Complex` struct and implemented some basic functions.
+
+- **25.01.20**: Implemented operation and property functions for `MatrixDbl`.
+- **25.01.19**: Implemented basic functions for `MatrixViewDbl`.
+- **25.01.18**: Defined the `MatrixViewDbl` struct.
+- **25.01.17**: Implemented functions for `VectorDbl`.
+- **25.01.17**: Defined the `VectorDbl` struct.
+- **25.01.17**: Implemented basic functions for `MatrixDbl`.
+- **25.01.16**: Defined the `MatrixDbl` struct.
+- **25.01.16**: Introduced the developer tool `ready_to_pr.sh`.
+- **25.01.13**: Implemented adaptive quadrature using Gauss quadrature and the Kronrod extension.
+- **25.01.12**: Added basic functions such as `min[T:Compare](T, T) -> T` and `max[T:Compare](T, T) -> T`.
+- **25.01.11**: Introduced type aliases for complex function signatures, such as `Func_Math` and `Quad_GK`.
+- **25.01.02**: Implemented quadrature using Gauss quadrature and the Kronrod extension.
+- **24.12.30**: Implemented derivative and differential functions using forward, backward, and central difference methods.
+- **24.12.29**: Enhanced the `Integer` type to accept all kinds of integers and implemented the fast power function `pow_integer_exp()`.
 
 <br>
 
@@ -62,12 +72,22 @@ __*从第一个测试版本正式发布开始，会保证英文和中文文档�
 
 # 项目进度
 
-- __[LATEST]__ 25.01.13: 使用 __高斯求积和克龙罗德扩展__ 的自适应积分.
-- 25.01.12: 诸如 `min[T:Compare](T, T) -> T` 和 `max[T:Compare](T, T) -> T` 的基本方法. 
-- 25.01.11: 对于较长的函数签名提供别名，诸如 `Func_Math` 和 `Quad_GK`.
-- 25.01.02: 使用 __高斯求积和克龙罗德扩展__ 的积分求值.
-- 24.12.30: 使用 __前向差分、后向差分和中心差分__ 实现的数值导数和数值微分.
-- 24.12.29: 能接受任意整数类型的`Integer`类型,  针对`Integer`类型指数的快速幂方法`pow_integer_exp()`.
+**[最新]** 25.01.20: 定义结构体 `Complex` 及其基础功能实现
+
+- **25.01.20**: 实现 `MatrixDbl` 的运算与性质函数
+- **25.01.19**: 实现 `MatrixViewDbl` 的基础功能
+- **25.01.18**: 定义结构体 `MatrixViewDbl`
+- **25.01.17**: 实现 `VectorDbl` 的相关函数
+- **25.01.17**: 定义结构体 `VectorDbl`
+- **25.01.17**: 实现 `MatrixDbl` 的基础功能
+- **25.01.16**: 定义结构体 `MatrixDbl`
+- **25.01.16**: 开发者工具 `ready_to_pr.sh`
+- **25.01.13**: 自适应求积法实现（使用高斯求积法及 Kronrod 扩展）
+- **25.01.12**: 基础函数实现：如 `min[T:Compare](T, T) -> T` 和 `max[T:Compare](T, T) -> T`
+- **25.01.11**: 为复杂函数签名定义类型别名，如 `Func_Math` 和 `Quad_GK`
+- **25.01.02**: 求积法实现（使用高斯求积法及 Kronrod 扩展）
+- **24.12.30**: 导数与微分功能实现（使用前向、后向及中心差分法）
+- **24.12.29**: `Integer` 类型支持各种整数类型，提供快速幂函数 `pow_integer_exp()`
 
 <br>
 
