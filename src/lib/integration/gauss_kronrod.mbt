@@ -57,7 +57,7 @@ fn gauss_kronrod(
   if n % 2 == 0 {
     result_gauss = f_center * wg[n / 2 - 1]
   }
-  for i = 0; i < n + 1; i = i + 1 {
+  for i = 0; i < n; i = i + 1 {
     let abscissa = half_length * xgk[i]
     let f_eval = [center - abscissa, center + abscissa]
     f_eval.map_inplace(f)
