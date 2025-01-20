@@ -49,6 +49,8 @@
   ```
 
   Please ensure that the code is formatted using `moon fmt` before submitting to maintain a consistent code style.
+  
+  Alternatively, you can use `ready_to_pr.sh` to automatically format the code, run checks, and generate the `.mbti` file.
 
 <br>
 
@@ -145,6 +147,8 @@ We encourage developers to use the AI comment generation provided by the MoonBit
   ```
 
   Please ensure that `.mbti` files are generated and updated with `moon info` before submitting the code to ensure a unified file structure.
+  
+  Alternatively, you can use `ready_to_pr.sh` to automatically format the code, run checks, and generate the `.mbti` file.
 
 <br>
 
@@ -162,9 +166,11 @@ We encourage developers to use the AI comment generation provided by the MoonBit
 
   Ensure the code is checked with `moon check` before submitting to ensure there are no compilation errors.
 
+  Alternatively, you can use `ready_to_pr.sh` to automatically format the code, run checks, and generate the `.mbti` file.
+
 - Commit messages should be in **English** and follow the principles of **brevity and clarity**.
 
-- Use prefixes like `fix:`, `feat:`, `refactor:` and `doc:` to categorize the commit type.
+- Use prefixes like `fix:`, `feat:`, `refactor:` , `doc:` and etc. to categorize the commit type.
 
 Example:
 
@@ -205,6 +211,8 @@ doc: add docs for something
   ```
 
   请确保在提交代码之前，使用 `moon fmt` 格式化代码，以保持一致的代码风格。
+  
+  或者，可以使用 `ready_to_pr.sh` 脚本来自动格式化代码、运行检查并生成 `.mbti` 文件。
 
 <br>
 
@@ -303,6 +311,8 @@ doc: add docs for something
   ```
 
   请确保在提交代码之前，使用 `moon info` 生成和更新.mbti文件，以保证统一的文件结构。
+  
+  或者，可以使用 `ready_to_pr.sh` 脚本来自动格式化代码、运行检查并生成 `.mbti` 文件。
 
 <br>
 
@@ -320,9 +330,11 @@ doc: add docs for something
 
   请确保在提交代码之前，使用 `moon check` 检查代码，以保证代码没有编译错误。
 
+  或者，可以使用 `ready_to_pr.sh` 脚本来自动格式化代码、运行检查并生成 `.mbti` 文件。
+
 - 提交信息应使用**英文**，并遵循**简短、精炼**的原则。
 
-- 使用 `fix:`，`feat:`，`refactor:` 和 `doc:` 前缀来区分提交的类型
+- 使用 `fix:`，`feat:`，`refactor:` 和 `doc:` 等前缀来区分提交的类型
 
 示例：
 
