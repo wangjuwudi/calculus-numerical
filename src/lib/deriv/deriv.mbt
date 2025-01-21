@@ -31,25 +31,18 @@ fn central_deriv(
   x : Double,
   h : Double
 ) -> (Double, Double, Double) {
-  let fn_eval : Array[Double] = [x - h, x - h / 2, x + h / 2, x + h]
-  fn_eval.map_inplace(f)
-  let r3 = 0.5 * (fn_eval[3] - fn_eval[0])
-  let r5 = 4.0 / 3.0 * (fn_eval[2] - fn_eval[1]) - 1.0 / 3.0 * r3
-  let e3 = (@double.abs(fn_eval[3]) + @double.abs(fn_eval[0])) *
+  let fm1 = f(x - h)
+  let fp1 = f(x + h)
+  let fmh = f(x - 0.5 * h)
+  let fph = f(x + 0.5 * h)
+  let r3 = 0.5 * (fp1 - fm1)
+  let r5 = 4.0 / 3.0 * (fph - fmh) - 1.0 / 3.0 * r3
+  let e3 = (fp1.abs() + fm1.abs()) * @internal.machine_dbl_epsilon
+  let e5 = 2.0 * (fph.abs() + fmh.abs()) * @internal.machine_dbl_epsilon + e3
+  let dy = @internal.max((r3 / h).abs(), (r5 / h).abs()) *
+    (x.abs() / h) *
     @internal.machine_dbl_epsilon
-  let e5 = 2.0 *
-    (@double.abs(fn_eval[2]) + @double.abs(fn_eval[1])) *
-    @internal.machine_dbl_epsilon +
-    e3
-  let a = @double.abs(r3 / h)
-  let b = @double.abs(r5 / h) *
-    (@double.abs(x) / h) *
-    @internal.machine_dbl_epsilon
-  let mut dy = a
-  if a < b {
-    dy = b
-  }
-  (r5 / h, @double.abs((r5 - r3) / h), @double.abs(e5 / h) + dy)
+  (r5 / h, ((r5 - r3) / h).abs(), (e5 / h).abs() + dy)
 }
 
 ///|
@@ -86,20 +79,20 @@ pub fn deriv_central(
   h : Double
 ) -> (Double, Double) {
   let (r0, round, trunc) = central_deriv(f, x, h)
-  let error = round + trunc
-  //round < trunc && (round > 0 && trunc > 0) will quicker? need to test.
+  let mut error = round + trunc
+  let mut r = r0
   if round < trunc && round > 0 && trunc > 0 {
-    let h_opt = h * @double.pow(round / (2.0 * trunc), 1.0 / 3.0)
+    let h_opt = h * (round / (2.0 * trunc)).pow(1.0 / 3.0)
+    
     let (r_opt, round_opt, trunc_opt) = central_deriv(f, x, h_opt)
     let error_opt = round_opt + trunc_opt
-    if error_opt < error && @double.abs(r_opt - r0) < 4.0 * error {
-      (r_opt, error_opt)
-    } else {
-      (r0, error)
-    }
-  } else {
-    (r0, error)
+
+    if error_opt < error && (r_opt - r0).abs() < 4.0 * error {
+      r = r_opt
+      error = error_opt
+    } 
   }
+  (r, error)
 }
 
 ///|
