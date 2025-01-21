@@ -29,9 +29,9 @@ pub fn rescale_error(
   result_abs : Double,
   result_asc : Double
 ) -> Double {
-  let mut err_ = @double.abs(err)
+  let mut err_ = err.abs()
   if result_asc != 0 && err_ != 0 {
-    let scale = @double.pow(200.0 * err_ / result_asc, 1.5)
+    let scale = (200.0 * err_ / result_asc).pow(1.5)
     if scale < 1 {
       err_ = result_asc * scale
     } else {
