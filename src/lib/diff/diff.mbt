@@ -22,28 +22,28 @@
 /// test "diff_backward" {
 ///   let f = fn(x : Double) { x * x } // f(x) = x^2, f'(x) = 2x
 ///   let (derivative, error) = diff_backward(f, 2.0)
-///   inspect!(@double.abs(derivative - 4.0) < error, content="true")
+///   inspect!((derivative - 4.0).abs() < error, content="true")
 /// }
 /// ```
 pub fn diff_backward(f : @internal.Func_Math, x : Double) -> (Double, Double) {
   let a : Array[Double] = [-2, -1, 0]
-  a.map_inplace(fn(n) { n * @internal.machine_dbl_epsilon + x })
+  fn q(n : Double) {
+    n * @internal.machine_dbl_epsilon + x
+  }
+
+  a.map_inplace(q)
   let d = a.map(f)
   for k = 1; k < 4; k = k + 1 {
     for i = 0; i < 3 - k; i = i + 1 {
       d[i] = (d[i + 1] - d[i]) / (a[i + k] - a[i])
     }
   }
-  let mut a2 = @double.abs(d[0] + d[1] + d[2])
+  let mut a2 = @internal.arr_sum_dbl(d).abs()
   let c = 100.0 * @internal.machine_sqrt_dbl_epsilon
-  if a2 < c {
-    a2 = c
-  }
-  let mut h = (@internal.machine_sqrt_dbl_epsilon / (2.0 * a2)).sqrt()
-  if h > c {
-    h = c
-  }
-  ((f(x) - f(x - h)) / h, @double.abs(10.0 * a2 * h))
+  a2 = @internal.max(a2, c)
+  let mut h = @internal.sqrt(@internal.machine_sqrt_dbl_epsilon * 0.5 / a2)
+  h = @internal.min(h, c)
+  ((f(x) - f(x - h)) / h, (10.0 * a2 * h).abs())
 }
 
 ///|
@@ -70,27 +70,27 @@ pub fn diff_backward(f : @internal.Func_Math, x : Double) -> (Double, Double) {
 /// test "diff_forward" {
 ///   let f = fn(x : Double) { x * x } // f(x) = x^2, f'(x) = 2x
 ///   let (derivative, error) = diff_forward(f, 2.0)
-///   inspect!(@double.abs(derivative - 4.0) < error, content="true")
+///   inspect!((derivative - 4.0).abs() < error, content="true")
 /// }
 /// ```
 pub fn diff_forward(f : @internal.Func_Math, x : Double) -> (Double, Double) {
   let a : Array[Double] = [0, 1, 2]
-  a.map_inplace(fn(n) { n * @internal.machine_dbl_epsilon + x })
-  let d = a.map(fn(n) { f(n) })
+  fn q(n : Double) {
+    n * @internal.machine_dbl_epsilon + x
+  }
+
+  a.map_inplace(q)
+  let d = a.map(f)
   for k = 1; k < 4; k = k + 1 {
     for i = 0; i < 3 - k; i = i + 1 {
       d[i] = (d[i + 1] - d[i]) / (a[i + k] - a[i])
     }
   }
-  let mut a2 = @double.abs(d[0] + d[1] + d[2])
+  let mut a2 = @internal.arr_sum_dbl(d).abs()
   let c = 100.0 * @internal.machine_sqrt_dbl_epsilon
-  if a2 < c {
-    a2 = c
-  }
-  let mut h = (@internal.machine_sqrt_dbl_epsilon / (2.0 * a2)).sqrt()
-  if h > c {
-    h = c
-  }
+  a2 = @internal.max(a2, c)
+  let mut h = @internal.sqrt(@internal.machine_sqrt_dbl_epsilon * 0.5 / a2)
+  h = @internal.min(h, c)
   ((f(x + h) - f(x)) / h, @double.abs(10.0 * a2 * h))
 }
 
@@ -123,29 +123,26 @@ pub fn diff_forward(f : @internal.Func_Math, x : Double) -> (Double, Double) {
 /// test "diff_central" {
 ///   let f = fn(x : Double) { x * x } // f(x) = x^2, f'(x) = 2x
 ///   let (derivative, error) = diff_central(f, 2.0)
-///   inspect!(@double.abs(derivative - 4.0) < error, content="true")
+///   inspect!((derivative - 4.0).abs() < error, content="true")
 /// }
 /// ```
 pub fn diff_central(f : @internal.Func_Math, x : Double) -> (Double, Double) {
   let a : Array[Double] = [-2, -1, 0, 1]
-  a.map_inplace(fn(n) { n * @internal.machine_dbl_epsilon + x })
-  let d = a.map(fn(n) { f(n) })
+  fn q(n : Double) {
+    n * @internal.machine_dbl_epsilon + x
+  }
+
+  a.map_inplace(q)
+  let d = a.map(f)
   for k = 1; k < 5; k = k + 1 {
     for i = 0; i < 4 - k; i = i + 1 {
       d[i] = (d[i + 1] - d[i]) / (a[i + k] - a[i])
     }
   }
-  let mut a3 = @double.abs(d[0] + d[1] + d[2] + d[3])
+  let mut a3 = @internal.arr_sum_dbl(d).abs()
   let c = 100.0 * @internal.machine_sqrt_dbl_epsilon
-  if a3 < c {
-    a3 = c
-  }
-  let mut h = @double.pow(
-    @internal.machine_sqrt_dbl_epsilon / (2.0 * a3),
-    1.0 / 3.0,
-  )
-  if h > c {
-    h = c
-  }
-  ((f(x + h) - f(x - h)) / (2.0 * h), @double.abs(100.0 * a3 * h * h))
+  a3 = @internal.max(a3, c)
+  let mut h = (@internal.machine_sqrt_dbl_epsilon * 0.5 / a3).pow(1.0 / 3.0)
+  h = @internal.min(h, c)
+  ((f(x + h) - f(x - h)) * 0.5 / h, (100.0 * a3 * h * h).abs())
 }
