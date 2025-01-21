@@ -45,11 +45,11 @@ fn gauss_kronrod(
 ) -> (Double, Double, Double, Double) {
   let center = 0.5 * (a + b)
   let half_length = 0.5 * (b - a)
-  let abs_half_length = @double.abs(half_length)
+  let abs_half_length = half_length.abs()
   let f_center = f(center)
   let mut result_gauss : Double = 0
   let mut result_kronrod = f_center * wgk[n - 1]
-  let mut result_abs = @double.abs(result_kronrod)
+  let mut result_abs = result_kronrod.abs()
   let mut result_asc : Double = 0
   let fv1 : Array[Double] = []
   let fv2 : Array[Double] = []
@@ -67,20 +67,18 @@ fn gauss_kronrod(
       let f_sum = f_eval[0] + f_eval[1]
       result_gauss = result_gauss + wg[(i - 1) / 2] * f_sum
       result_kronrod = result_kronrod + wgk[i] * f_sum
-      result_abs = result_abs +
-        wgk[i] * (@double.abs(f_eval[0]) + @double.abs(f_eval[1]))
+      result_abs = result_abs + wgk[i] * (f_eval[0].abs() + f_eval[1].abs())
     } else {
       result_kronrod = result_kronrod + wgk[i] * (f_eval[0] + f_eval[1])
-      result_abs = result_abs +
-        wgk[i] * (@double.abs(f_eval[0]) + @double.abs(f_eval[1]))
+      result_abs = result_abs + wgk[i] * (f_eval[0].abs() + f_eval[1].abs())
     }
     is_odd = not(is_odd)
   }
   let mean = result_kronrod * 0.5
-  result_asc = wgk[n - 1] * @double.abs(f_center - mean)
+  result_asc = wgk[n - 1] * (f_center - mean).abs()
   for j = 0; j < n - 1; j = j + 1 {
     result_asc = result_asc +
-      wgk[j] * (@double.abs(fv1[j] - mean) + @double.abs(fv2[j] - mean))
+      wgk[j] * ((fv1[j] - mean).abs() + (fv2[j] - mean).abs())
   }
   let err = (result_kronrod - result_gauss) * half_length
   result_kronrod = result_kronrod * half_length
