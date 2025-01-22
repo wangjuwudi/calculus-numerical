@@ -45,3 +45,12 @@ pub fn sqrt(x : Double) -> Double {
 pub fn hypot(x : Double, y : Double) -> Double {
   sqrt(x * x + y * y)
 }
+
+///|
+pub fn zero_arr_dbl(n : Int) -> Array[Double] {
+  let arr = []
+  for i = 0; i < n; i = i + 1 {
+    arr.push(0.0)
+  }
+  arr
+}
