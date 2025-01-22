@@ -163,6 +163,8 @@ fn rescale_error(Double, Double, Double) -> Double
 
 fn sqrt(Double) -> Double
 
+fn zero_arr_dbl(Int) -> Array[Double]
+
 // Types and methods
 pub(all) enum Integer {
   IntegerInt(Int)
