@@ -71,8 +71,8 @@ pub fn Complex::abs_sqr(self : Complex) -> Double {
 
 ///|
 pub fn Complex::abs_log(self : Complex) -> Double {
-  let re_abs = @double.abs(self.re)
-  let im_abs = @double.abs(self.im)
+  let re_abs = self.re.abs()
+  let im_abs = self.im.abs()
   let mut t = 0.0
   if re_abs >= im_abs {
     t = im_abs / re_abs
@@ -253,8 +253,8 @@ pub fn Complex::neg(self : Complex) -> Unit {
 ///|
 pub fn Complex::sqrt(self : Complex) -> Complex {
   guard self.re != 0 || self.im != 0 else { Complex::new(0.0, 0.0) }
-  let re_abs = @double.abs(self.re)
-  let im_abs = @double.abs(self.im)
+  let re_abs = self.re.abs()
+  let im_abs = self.im.abs()
   let mut w = 0.0
   if re_abs >= im_abs {
     let t = im_abs / re_abs

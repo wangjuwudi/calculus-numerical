@@ -14,6 +14,9 @@
 /// Returns a rescaled error value that takes into account both the relative
 /// magnitude of the error and machine precision limitations.
 ///
+/// Temporary implementation: Use sqrt(x * x * x) instead of pow(x, 1.5) 
+/// until a new, higher-precision implementation of pow is completed.
+/// 
 /// Example:
 ///
 /// ```moonbit
@@ -31,7 +34,8 @@ pub fn rescale_error(
 ) -> Double {
   let mut err_ = err.abs()
   if result_asc != 0 && err_ != 0 {
-    let scale = (200.0 * err_ / result_asc).pow(1.5)
+    let x = 200.0 * err_ / result_asc
+    let scale = sqrt(x * x * x)
     if scale < 1 {
       err_ = result_asc * scale
     } else {
