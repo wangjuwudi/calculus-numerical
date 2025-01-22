@@ -53,7 +53,11 @@ fn qpsrt(workspace : IntegrationWorkspace) -> Unit {
   let i_maxerr = workspace.order[0]
   if last < 2 {
     workspace.order[0] = 0
-    workspace.order[1] = 1
+    if workspace.order.length() > 1 {
+      workspace.order[1] = 1
+    } else {
+      workspace.order.push(1)
+    }
     workspace.i = workspace.order[0]
   }
   let errmax = workspace.e_list[i_maxerr]
@@ -72,10 +76,18 @@ fn qpsrt(workspace : IntegrationWorkspace) -> Unit {
   workspace.order[i - 1] = i_maxerr
   let errmin = workspace.e_list[last]
   while k > i - 2 && errmin >= workspace.e_list[workspace.order[k]] {
-    workspace.order[k + 1] = workspace.order[k]
+    if workspace.order.length() <= k + 1 {
+      workspace.order.push(workspace.order[k])
+    } else {
+      workspace.order[k + 1] = workspace.order[k]
+    }
     k = k - 1
   }
-  workspace.order[k + 1] = last
+  if workspace.order.length() <= k + 1 {
+    workspace.order.push(last)
+  } else {
+    workspace.order[k + 1] = last
+  }
   workspace.i = workspace.order[0]
 }
 
@@ -140,6 +152,6 @@ pub fn IntegrationWorkspace::subinterval_check(
   b_2 : Double
 ) -> Bool {
   let tmp = (1.0 + 100.0 * @internal.machine_dbl_epsilon) *
-    (@double.abs(a_2) + 1000.0 * @internal.machine_dbl_min)
-  @double.abs(a_1) <= tmp && @double.abs(b_2) <= tmp
+    (a_2.abs() + 1000.0 * @internal.machine_dbl_min)
+  a_1.abs() <= tmp && b_2.abs() <= tmp
 }

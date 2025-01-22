@@ -51,34 +51,38 @@ fn gauss_kronrod(
   let mut result_kronrod = f_center * wgk[n - 1]
   let mut result_abs = result_kronrod.abs()
   let mut result_asc : Double = 0
-  let fv1 : Array[Double] = []
-  let fv2 : Array[Double] = []
-  let mut is_odd : Bool = false
+  let fv1 : Array[Double] = @internal.zero_arr_dbl(n)
+  let fv2 : Array[Double] = @internal.zero_arr_dbl(n)
   if n % 2 == 0 {
     result_gauss = f_center * wg[n / 2 - 1]
   }
-  for i = 0; i < n; i = i + 1 {
-    let abscissa = half_length * xgk[i]
-    let f_eval = [center - abscissa, center + abscissa]
-    f_eval.map_inplace(f)
-    fv1.push(f_eval[0])
-    fv2.push(f_eval[1])
-    if is_odd {
-      let f_sum = f_eval[0] + f_eval[1]
-      result_gauss = result_gauss + wg[(i - 1) / 2] * f_sum
-      result_kronrod = result_kronrod + wgk[i] * f_sum
-      result_abs = result_abs + wgk[i] * (f_eval[0].abs() + f_eval[1].abs())
-    } else {
-      result_kronrod = result_kronrod + wgk[i] * (f_eval[0] + f_eval[1])
-      result_abs = result_abs + wgk[i] * (f_eval[0].abs() + f_eval[1].abs())
-    }
-    is_odd = not(is_odd)
+  for i = 0; i < (n - 1) / 2; i = i + 1 {
+    let jtw = 2 * i + 1
+    let abscissa = half_length * xgk[jtw]
+    let fval1 = f(center - abscissa)
+    let fval2 = f(center + abscissa)
+    let fsum = fval1 + fval2
+    fv1[jtw] = fval1
+    fv2[jtw] = fval2
+    result_gauss = result_gauss + wg[i] * fsum
+    result_kronrod = result_kronrod + wgk[jtw] * fsum
+    result_abs = result_abs + wgk[jtw] * (fval1.abs() + fval2.abs())
+  }
+  for i = 0; i < n / 2; i = i + 1 {
+    let jtwm1 = 2 * i
+    let abscissa = half_length * xgk[jtwm1]
+    let fval1 = f(center - abscissa)
+    let fval2 = f(center + abscissa)
+    fv1[jtwm1] = fval1
+    fv2[jtwm1] = fval2
+    result_kronrod = result_kronrod + wgk[jtwm1] * (fval1 + fval2)
+    result_abs = result_abs + wgk[jtwm1] * (fval1.abs() + fval2.abs())
   }
   let mean = result_kronrod * 0.5
   result_asc = wgk[n - 1] * (f_center - mean).abs()
-  for j = 0; j < n - 1; j = j + 1 {
+  for i = 0; i < n - 1; i = i + 1 {
     result_asc = result_asc +
-      wgk[j] * ((fv1[j] - mean).abs() + (fv2[j] - mean).abs())
+      wgk[i] * ((fv1[i] - mean).abs() + (fv2[i] - mean).abs())
   }
   let err = (result_kronrod - result_gauss) * half_length
   result_kronrod = result_kronrod * half_length
