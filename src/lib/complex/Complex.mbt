@@ -1,24 +1,4 @@
 ///|
-/// Represents a complex number in the form a + bi, where a is the real part and
-/// b is the imaginary part.
-///
-/// Both real and imaginary parts are mutable and stored as double-precision
-/// floating-point numbers.
-///
-/// Parameters:
-///
-/// * `re` : The real part of the complex number.
-/// * `im` : The imaginary part of the complex number.
-///
-/// Example:
-///
-/// ```moonbit
-/// test "Complex" {
-///   let z = Complex::new(3.0, 4.0)
-///   inspect!(z.re, content="3")
-///   inspect!(z.im, content="4")
-/// }
-/// ```
 pub(all) struct Complex {
   mut re : Double
   mut im : Double

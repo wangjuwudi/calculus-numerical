@@ -35,7 +35,6 @@ pub fn rescale_error(
   let mut err_ = err.abs()
   if result_asc != 0 && err_ != 0 {
     let x = 200.0 * err_ / result_asc
-    
     let scale = sqrt(x * x * x)
     if scale < 1 {
       err_ = result_asc * scale
