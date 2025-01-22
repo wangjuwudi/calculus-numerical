@@ -104,7 +104,7 @@ pub fn arr_sum_dbl(arr : Array[Double]) -> Double {
 pub fn sqrt(x : Double) -> Double {
   guard x >= 0.0 else { @double.not_a_number }
   guard x != @double.infinity else { @double.infinity }
-  guard x != 0.0 || x != 1.0 else { x }
+  guard x != 0.0 && x != 1.0 else { x }
   let mut guess = x / 2.0
   let mut diff = 1.0
   let epsilon = 0.0000001
