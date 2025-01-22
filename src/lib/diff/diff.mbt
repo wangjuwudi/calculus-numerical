@@ -91,7 +91,7 @@ pub fn diff_forward(f : @internal.Func_Math, x : Double) -> (Double, Double) {
   a2 = @internal.max(a2, c)
   let mut h = @internal.sqrt(@internal.machine_sqrt_dbl_epsilon * 0.5 / a2)
   h = @internal.min(h, c)
-  ((f(x + h) - f(x)) / h, (10.0 * a2 * h).abs())
+  ((f(x + h) - f(x)) / h, @double.abs(10.0 * a2 * h))
 }
 
 ///|
