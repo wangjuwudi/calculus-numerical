@@ -1,9 +1,8 @@
 ///|
 /// Computes the numerical derivative of a function at a given point using
-/// backward difference method with adaptive step size.
-///
-/// Reference:
-/// GNU Scientific Library @diff/diff.c
+/// backward difference method with adaptive step size. This implementation is
+/// based on the GNU Scientific Library's differentiation module, providing a
+/// balance between accuracy and numerical stability.
 ///
 /// Parameters:
 ///
@@ -48,11 +47,10 @@ pub fn diff_backward(f : @basic.Func_Math, x : Double) -> (Double, Double) {
 
 ///|
 /// Computes the numerical derivative of a function at a given point using
-/// forward difference method with adaptive step size.
-/// 
-/// Reference:
-/// GNU Scientific Library @diff/diff.c
-/// 
+/// forward difference method with adaptive step size. This implementation is
+/// based on the GNU Scientific Library's differentiation module, providing a
+/// balance between accuracy and numerical stability.
+///
 /// Parameters:
 ///
 /// * `function` : A function that takes a `Double` and returns a `Double`. The
@@ -61,7 +59,7 @@ pub fn diff_backward(f : @basic.Func_Math, x : Double) -> (Double, Double) {
 ///
 /// Returns a tuple containing:
 ///
-/// * The estimated derivative value
+/// * The estimated derivative value using forward difference approximation
 /// * The estimated absolute error of the computation
 ///
 /// Example:
@@ -96,15 +94,9 @@ pub fn diff_forward(f : @basic.Func_Math, x : Double) -> (Double, Double) {
 
 ///|
 /// Computes the numerical derivative of a function at a given point using
-/// central difference method with adaptive step size.
-///
-/// This method provides a more accurate approximation compared to forward or
-/// backward difference methods by using points on both sides of the evaluation
-/// point. The step size is automatically adjusted based on the function's
-/// behavior to balance between truncation and round-off errors.
-///
-/// Reference:
-/// GNU Scientific Library @diff/diff.c
+/// central difference method with adaptive step size. This implementation is
+/// based on the GNU Scientific Library's differentiation module, providing
+/// higher accuracy compared to forward and backward difference methods.
 ///
 /// Parameters:
 ///

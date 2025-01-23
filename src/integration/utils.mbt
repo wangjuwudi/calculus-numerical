@@ -1,4 +1,32 @@
 ///|
+/// Checks if a subinterval is too small relative to its position in the
+/// integration interval, which helps detect possible numerical instabilities
+/// during adaptive integration.
+///
+/// Parameters:
+///
+/// * `left_bound` : The left endpoint of the first subinterval.
+/// * `middle_point` : The point that divides the original interval.
+/// * `right_bound` : The right endpoint of the second subinterval.
+///
+/// Returns a boolean value indicating whether the subinterval is too small
+/// relative to its position (true) or not (false).
+///
+/// Example:
+///
+/// ```moonbit
+/// test "subinterval_check" {
+///   let is_small = subinterval_check(1e-15, 1e-15, 1e-15)
+///   inspect!(is_small, content="true")
+/// }
+/// ```
+fn subinterval_check(a_1 : Double, a_2 : Double, b_2 : Double) -> Bool {
+  let tmp = (1.0 + 100.0 * @internal.machine_dbl_epsilon) *
+    (a_2.abs() + 1000.0 * @internal.machine_dbl_min)
+  a_1.abs() <= tmp && b_2.abs() <= tmp
+}
+
+///|
 /// Rescales the absolute error estimate using both the magnitude of the result
 /// and the accumulation of roundoff errors. Implements sophisticated error
 /// rescaling that accounts for both the relative size of the error and numerical
@@ -42,8 +70,9 @@ pub fn rescale_error(
       err_ = result_asc
     }
   }
-  if result_abs > machine_dbl_min / (50.0 * machine_dbl_epsilon) {
-    let min_err = 50.0 * machine_dbl_epsilon * result_abs
+  if result_abs >
+    @internal.machine_dbl_min / (50.0 * @internal.machine_dbl_epsilon) {
+    let min_err = 50.0 * @internal.machine_dbl_epsilon * result_abs
     if min_err > err_ {
       err_ = min_err
     }

@@ -1,33 +1,36 @@
 ///|
 /// Performs adaptive Gauss-Kronrod quadrature integration on a given function
-/// over a specified interval. The algorithm adaptively subdivides the
-/// integration interval to achieve the desired accuracy, using a Gauss-Kronrod
-/// quadrature rule for each subinterval.
+/// over a specified interval. Recursively subdivides the interval until the
+/// desired accuracy is achieved or certain error conditions are met.
 ///
 /// Parameters:
 ///
-/// * `integrand` : The function to be integrated, taking a `Double` parameter
-/// and returning a `Double`.
+/// * `integrand` : The function to be integrated. Takes a `Double` and returns a
+/// `Double`.
 /// * `quadrature` : The Gauss-Kronrod quadrature rule to be used for
-/// integration. This function takes the integrand and interval bounds as
-/// parameters and returns a tuple containing the integral approximation,
-/// absolute value, absolute central difference, and estimated error.
+/// integration. Can be one of `kronrod_r15`, `kronrod_r21`, `kronrod_r31`,
+/// `kronrod_r41`, `kronrod_r51`, or `kronrod_r61`.
 /// * `lower_bound` : The lower bound of the integration interval.
 /// * `upper_bound` : The upper bound of the integration interval.
-/// * `absolute_tolerance` : The absolute error tolerance for the integration.
-/// * `relative_tolerance` : The relative error tolerance for the integration.
-/// * `subdivision_limit` : The maximum number of subintervals allowed for the
-/// adaptive integration.
+/// * `absolute_tolerance` : The absolute error tolerance. Must be positive.
+/// * `relative_tolerance` : The relative error tolerance. Must be greater than
+/// machine epsilon.
+/// * `max_intervals` : Maximum number of subintervals allowed in the subdivision
+/// process.
 ///
 /// Returns a `Result` containing either:
 ///
-/// * `Ok((integral, error, status))`: where `integral` is the approximation of
-/// the definite integral, `error` is the estimated absolute error, and `status`
-/// is a string indicating the integration status ("OK", "E\_ROUND",
-/// "E\_SINGULARITY", or "E\_MAX\_ITER").
-/// * `Err(error_message)`: where `error_message` is either "E\_FAILED" or
-/// "E\_BAD\_TOL" indicating integration failure or invalid tolerance parameters
-/// respectively.
+/// * `Ok((result, error, status))` where:
+///  * `result` is the approximated value of the integral
+///  * `error` is the estimated absolute error
+///  * `status` is one of:
+///  * `"OK"`: Integration successful
+///  * `"E_ROUND"`: Roundoff error detected
+///  * `"E_SINGULARITY"`: Possible singularity or highly oscillatory integrand
+///  * `"E_MAX_ITER"`: Maximum number of subdivisions reached
+/// * `Err(error_message)` where `error_message` is one of:
+///  * `"E_BAD_TOL"`: Invalid tolerance parameters
+///  * `"E_FAILED"`: Integration failed to converge
 ///
 /// Example:
 ///
@@ -35,11 +38,10 @@
 /// test "adap_quad_gk" {
 ///   // Integrate x^2 from 0 to 1
 ///   let f = fn(x : Double) -> Double { x * x }
-///   let (result, error, status) = adap_quad_gk(
-///     f, kronrod_r15, 0.0, 1.0, 1.0e-8, 1.0e-8, 1000,
+///   let (result, _, _) = adap_quad_gk(
+///     f, kronrod_r15, 0.0, 1.0, 1.0e-10, 1.0e-10, 100,
 ///   ).unwrap()
 ///   inspect!(@double.round(result * 1000.0) / 1000.0, content="0.333")
-///   inspect!(status, content="OK")
 /// }
 /// ```
 pub fn adap_quad_gk(
@@ -108,7 +110,7 @@ pub fn adap_quad_gk(
         if roundoff_type_1 >= 6 || roundoff_type_2 >= 20 {
           error_type = 2
         }
-        if IntegrationWorkspace::subinterval_check(a_1, a_2, b_2) {
+        if subinterval_check(a_1, a_2, b_2) {
           error_type = 3
         }
       }

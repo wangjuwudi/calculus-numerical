@@ -1,4 +1,25 @@
 ///|
+/// Represents a complex number with real and imaginary parts.
+///
+/// A complex number is a combination of a real number and an imaginary number in
+/// the form `a + bi`, where `a` is the real part, `b` is the imaginary part, and
+/// `i` is the imaginary unit defined by `i² = -1`. Both parts are stored as
+/// double-precision floating-point numbers.
+///
+/// Parameters:
+///
+/// * `re` : The real part of the complex number.
+/// * `im` : The imaginary part of the complex number.
+///
+/// Example:
+///
+/// ```moonbit
+/// test "Complex/construction" {
+///   let z = Complex::new(3.0, 4.0)
+///   inspect!(z.re, content="3")
+///   inspect!(z.im, content="4")
+/// }
+/// ```
 pub(all) struct Complex {
   mut re : Double
   mut im : Double
