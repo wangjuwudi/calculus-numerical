@@ -111,8 +111,6 @@ let machine_sqrt_flt_min : Double
 
 let machine_sqrt_sflt_epsilon : Double
 
-fn rescale_error(Double, Double, Double) -> Double
-
 // Types and methods
 
 // Type aliases
