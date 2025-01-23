@@ -15,26 +15,10 @@ fn kronrod_r51((Double) -> Double, Double, Double) -> (Double, Double, Double, D
 
 fn kronrod_r61((Double) -> Double, Double, Double) -> (Double, Double, Double, Double)
 
+fn rescale_error(Double, Double, Double) -> Double
+
 // Types and methods
-pub struct IntegrationWorkspace {
-  limit : Int
-  size : Int
-  i : Int
-  maximum_level : Int
-  a_list : Array[Double]
-  b_list : Array[Double]
-  r_list : Array[Double]
-  e_list : Array[Double]
-  order : Array[Int]
-  level : Array[Int]
-}
-impl IntegrationWorkspace {
-  init(Self, Double, Double, Double, Double) -> Unit
-  new(Int) -> Self
-  retrieve(Self) -> (Double, Double, Double, Double)
-  subinterval_check(Double, Double, Double) -> Bool
-  update(Self, Double, Double, Double, Double, Double, Double, Double, Double) -> Unit
-}
+type IntegrationWorkspace
 
 // Type aliases
 
