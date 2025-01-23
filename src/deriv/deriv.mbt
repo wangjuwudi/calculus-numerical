@@ -1,31 +1,4 @@
 ///|
-/// Computes the central derivative approximation of a function at a point with
-/// error estimates using a 5-point rule for the derivative and a 3-point rule
-/// for the error estimation.
-///
-/// Parameters:
-///
-/// * `f` : The function to differentiate. Takes a `Double` and returns a
-/// `Double`.
-/// * `x` : The point at which to compute the derivative.
-/// * `h` : The step size used in the numerical approximation.
-///
-/// Returns a tuple containing:
-///
-/// * The derivative approximation using a 5-point rule
-/// * The absolute difference between 5-point and 3-point approximations
-/// * The estimated absolute error, including both truncation and round-off
-/// errors
-///
-/// Example:
-///
-/// ```moonbit
-/// test "central_deriv" {
-///   let f = fn(x : Double) { x * x } // f(x) = x^2, f'(x) = 2x
-///   let (deriv, diff, error) = central_deriv(f, 2.0, 0.1)
-///   inspect!((deriv - 4.0).abs() < error, content="true")
-/// }
-/// ```
 fn central_deriv(
   f : @basic.Func_Math,
   x : Double,
@@ -49,20 +22,22 @@ fn central_deriv(
 /// Computes the central derivative approximation of a function at a point with
 /// adaptive step size refinement. Uses a combination of 5-point and 3-point
 /// rules to estimate both the derivative and its error, with automatic step size
-/// optimization when possible.
+/// optimization based on the relative magnitudes of truncation and round-off
+/// errors.
 ///
 /// Parameters:
 ///
-/// * `function` : The function to differentiate. Takes a `Double` and returns a
-/// `Double`.
+/// * `function` : A mathematical function that takes a `Double` and returns a
+/// `Double`. The function to be differentiated.
 /// * `point` : The point at which to compute the derivative.
 /// * `step` : The initial step size for the numerical approximation. Will be
-/// automatically refined if possible.
+/// automatically refined if possible to minimize the total error.
 ///
 /// Returns a tuple containing:
 ///
 /// * The best available derivative approximation
-/// * The estimated absolute error of the computation
+/// * The estimated absolute error of the computation, combining both truncation
+/// and round-off errors
 ///
 /// Example:
 ///
@@ -94,37 +69,6 @@ pub fn deriv_central(
 }
 
 ///|
-/// Computes the forward derivative approximation of a function at a point with
-/// error estimates using a 4-point rule for the derivative and a 2-point rule
-/// for the error estimation.
-///
-/// Uses an optimized combination of sampling points at h/4, h/2, 3h/4, and h
-/// distances from the evaluation point to achieve higher accuracy compared to
-/// simple forward difference methods.
-///
-/// Parameters:
-///
-/// * `function` : The function to differentiate. Takes a `Double` and returns a
-/// `Double`.
-/// * `point` : The point at which to compute the derivative.
-/// * `step` : The step size used in the numerical approximation.
-///
-/// Returns a tuple containing:
-///
-/// * The derivative approximation using a 4-point rule
-/// * The absolute difference between 4-point and 2-point approximations
-/// * The estimated absolute error, including both truncation and round-off
-/// errors
-///
-/// Example:
-///
-/// ```moonbit
-/// test "forward_deriv" {
-///   let f = fn(x : Double) { x * x } // f(x) = x^2, f'(x) = 2x
-///   let (deriv, diff, error) = forward_deriv(f, 2.0, 0.1)
-///   inspect!((deriv - 4.0).abs() < error, content="true")
-/// }
-/// ```
 fn forward_deriv(
   f : @basic.Func_Math,
   x : Double,
@@ -151,20 +95,22 @@ fn forward_deriv(
 /// Computes the forward derivative approximation of a function at a point with
 /// adaptive step size refinement. Uses a combination of 4-point and 2-point
 /// rules to estimate both the derivative and its error, with automatic step size
-/// optimization when possible.
+/// optimization based on the relative magnitudes of truncation and round-off
+/// errors.
 ///
 /// Parameters:
 ///
-/// * `function` : A function that takes a `Double` and returns a `Double`. The
-/// function to be differentiated.
+/// * `function` : A mathematical function that takes a `Double` and returns a
+/// `Double`. The function to be differentiated.
 /// * `point` : The point at which to compute the derivative.
 /// * `step` : The initial step size for the numerical approximation. Will be
-/// automatically refined if possible.
+/// automatically refined if possible to minimize the total error.
 ///
 /// Returns a tuple containing:
 ///
 /// * The best available derivative approximation
-/// * The estimated absolute error of the computation
+/// * The estimated absolute error of the computation, combining both truncation
+/// and round-off errors
 ///
 /// Example:
 ///
@@ -197,21 +143,23 @@ pub fn deriv_forward(
 
 ///|
 /// Computes the backward derivative approximation of a function at a point with
-/// adaptive step size refinement. Uses the forward derivative implementation
-/// with a negated step size to compute the backward derivative.
+/// adaptive step size refinement. Uses the same algorithm as forward
+/// differentiation but with a negative step size, making it suitable for cases
+/// where backward differences are preferred.
 ///
 /// Parameters:
 ///
-/// * `function` : A function that takes a `Double` and returns a `Double`. The
-/// function to be differentiated.
+/// * `function` : A mathematical function that takes a `Double` and returns a
+/// `Double`. The function to be differentiated.
 /// * `point` : The point at which to compute the derivative.
 /// * `step` : The initial step size for the numerical approximation. Will be
-/// automatically refined if possible.
+/// automatically refined if possible to minimize the total error.
 ///
 /// Returns a tuple containing:
 ///
 /// * The best available derivative approximation
-/// * The estimated absolute error of the computation
+/// * The estimated absolute error of the computation, combining both truncation
+/// and round-off errors
 ///
 /// Example:
 ///
