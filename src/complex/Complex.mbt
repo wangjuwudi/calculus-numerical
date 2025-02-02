@@ -435,20 +435,17 @@ pub fn Complex::tan(self : Complex) -> Complex {
 ///|
 /// 计算复数的sec  sec(x) = 1/cos(x)
 pub fn Complex::sec(self : Complex) -> Complex {
-  let z = self.cos()
-  z.inverse()
+  self.cos().inverse()
 }
 ///|
 /// 计算复数的csc  csc(x) = 1/sin(x)
 pub fn Complex::csc(self : Complex) -> Complex {
-  let z = self.sin()
-  z.inverse()
+  self.sin().inverse()
 }
 ///|
 /// 计算复数的cot  cot(x) = 1/tan(x)
 pub fn Complex::cot(self : Complex) -> Complex {
-  let z = self.tan()
-  z.inverse()
+  self.tan().inverse()
 }
 
 // /**********************************************************************
@@ -621,8 +618,7 @@ pub fn arctan (self : Complex) -> Complex {
 ///|
 /// 计算虚数的反正割
 pub fn Complex::arcsec(self : Complex) -> Complex {
-  let z =self.inverse()
-  z.arccos()
+  self.inverse().arccos()
 }
 ///|
 /// 计算实数的反正割
@@ -640,8 +636,7 @@ pub fn Complex::aecsec_real(x : Double) -> Complex {
 ///|
 ///  计算复数的反余割
 pub fn Complex::arccsc(self : Complex) -> Complex {
-  let z = self.inverse()
-  z.arcsin()
+  self.inverse().arcsin()
 }
 ///|
 /// 计算实数的反余割
@@ -662,11 +657,106 @@ pub fn Complex::arccot(self : Complex) -> Complex {
   if self.re == 0.0 && self.im == 0.0 {
     Complex::new(@math.PI / 2.0, 0.0)
   }else{
-    let z = self.inverse()
-    z.arctan()
+    self.inverse().arctan()
   }
 }
 
+// /**********************************************************************
+//  * Complex Hyperbolic Functions
+//  **********************************************************************/
+///|
+pub fn Complex::sinh(self : Complex) -> Complex {
+  let re = self.re
+  let im = self.im
+  Complex::new(@basic.sinh(re) * @math.cos(im),
+                @basic.cosh(re) * @math.sin(im) )
+ }
+ ///|
+pub fn Complex::cosh(self : Complex) -> Complex {
+  let re = self.re
+  let im = self.im
+  Complex::new(@basic.cosh(re) * @math.cos(im),
+                  @basic.sinh(re) * @math.sin(im))
+}
+pub fn Complex::tanh(self : Complex) -> Complex {
+  let re = self.re
+  let im = self.im
+  if re > -1.0 && re < 1.0 {
+    let d = Double::pow(@math.cos(im), 2.0) + Double::pow(@basic.sinh(re), 2.0)
+    Complex::new(@basic.sinh(re) * @basic.cosh(re) / d, 0.5 * @math.sin(2.0 * im) / d)
+  }else{
+    let d = Double::pow(@math.cos(im), 2.0) + Double::pow(@basic.sinh(re), 2.0)
+    let f = 1.0 + Double::pow(@math.cos(im) / @basic.sinh(re), 2.0)
+    Complex::new(1.0 / (@basic.tanh(re) * f), 0.5 * @math.sin(2.0 * im) / d)
+  }
+}
+///|
+pub fn Complex::sech(self : Complex) -> Complex {
+  self.cosh().inverse()
+}
+///|
+pub fn Complex::csch(self : Complex) -> Complex {
+  self.sinh().inverse()
+}
+///|
+pub fn Complex::coth(self : Complex) -> Complex {
+  self.tanh().inverse()
+}
+
+//  **********************************************************************
+//  * Inverse Complex Hyperbolic Functions
+//  **********************************************************************/
+
+///|
+pub fn Complex::arcsinh(self : Complex) -> Complex {
+  let mut z = mul_imag(self, 1.0)
+  z = z.arcsin()
+  z.mul_imag(-1.0)
+} 
+///|
+pub fn Complex::arccosh(self : Complex) -> Complex {
+  let z = self.arccos()
+  z.mul_imag(  if z.im > 0 {-1.0} 
+               else {1.0}   )
+}
+pub fn Complex::arccosh_real(x : Double) -> Complex {
+  if x >= 1 {
+    Complex::new(@basic.acosh(x), 0.0)
+  }else{
+    if x >= -1.0 {
+      Complex::new(0, @math.acos(x))
+    }else{
+      Complex::new(@basic.acosh(-x), @math.PI)
+    }
+  }
+}
+pub fn Complex::arctanh(self : Complex) -> Complex {
+  if self.im == 0.0 {
+    arctanh_real(self.re)
+  }else{
+    let mut z = mul_imag(self , 1.0)
+    z = z.arctan()
+    z.mul_imag(-1.0)
+  }
+}
+pub fn Complex::arctanh_real(x : Double) -> Complex {
+  if x > -1.0 && x < 1.0 {
+    Complex::new(@basic.atanh(x), 0.0)
+  }else{
+    Complex::new(@basic.atanh(1.0 / x) ,
+                  if x < 0 {@math.PI / 2}
+                  else     {-@math.PI / 2})
+  }
+}
+pub fn Complex::arcsech(self : Complex) -> Complex {
+  self.inverse().arccosh()
+}
+pub fn Complex::arccsch(self : Complex) -> Complex {
+  self.inverse().arcsinh()
+}
+pub fn Complex::arccoth(self : Complex) -> Complex {
+  self.inverse().arctanh()
+}
 
 
 

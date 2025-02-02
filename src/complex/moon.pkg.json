@@ -1,5 +1,7 @@
 {
     "import":[
-        "KCN-judu/calculus-numerical/basic"
+      "KCN-judu/calculus-numerical/basic",
+      "KCN-judu/calculus-numerical/internal",
+      "KCN-judu/calculus-numerical/integration"
     ]
 }
